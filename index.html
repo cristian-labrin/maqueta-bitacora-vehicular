@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Bitácora Vehicular</title>
+    <link href="./css/estilo.css" rel="stylesheet">
+    <link href="./node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="./node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="./node_modules/jquery/dist/jquery.min.js"></script>
+    <link href="./node_modules/bootstrap-icons/font/bootstrap-icons.min.css" rel="stylesheet">
+    <script src="./js/index.js"></script>
+</head>
+
+<body>
+
+<div class="d-flex">
+    <div class="bg-navy">
+        <!-- COLLAPSE SIDEBAR -->
+        <div class="px-3 pt-3">
+            <h3><i id="btnCollapseMenu" class="bi bi-list text-white"></i> <span id="spBitacora" class="ms-2 text-white">Bitácora</span></h3>
+        </div>
+        <!-- SIDEBAR -->
+        <div id="sidebar" class="sidebar bg-navy text-white px-3" style="width: 250px; height: 100vh;">
+            <!--<h3><i class="bi bi-journal-text"></i> Bitácora</h3> -->
+            <hr>  
+            <div class="nav nav-pills flex-column mb-auto" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                <button id="btnVehiculo" class="nav-link text-start active" id="v-pills-home-tab" data-bs-toggle="pill" data-bs-target="#v-pills-home" type="button" role="tab" aria-controls="v-pills-home" aria-selected="true">
+                    <i class="bi bi-car-front me-2" data-tooltip="Vehículos"></i>
+                    <span>Vehículos</span>
+                </button>
+                <button id="btnViaje" class="nav-link text-start" id="v-pills-profile-tab" data-bs-toggle="pill" data-bs-target="#v-pills-profile" type="button" role="tab" aria-controls="v-pills-profile" aria-selected="false">
+                    <i class="bi bi-map me-2" data-tooltip="Viajes"></i>
+                    <span>Viajes</span>
+                </button>
+                <button id="btnCargas" class="nav-link text-start" id="v-pills-disabled-tab" data-bs-toggle="pill" data-bs-target="#v-pills-disabled" type="button" role="tab" aria-controls="v-pills-disabled" aria-selected="false">
+                    <i class="bi bi-fuel-pump me-2" data-tooltip="Cargas"></i>
+                    <span>Cargas</span>
+                </button>
+                <button id="btnAdmin" class="nav-link text-start" id="v-pills-messages-tab" data-bs-toggle="pill" data-bs-target="#v-pills-messages" type="button" role="tab" aria-controls="v-pills-messages" aria-selected="false">
+                    <i class="bi bi-person-gear me-2" data-tooltip="Administración"></i>
+                    <span>Administración</span>
+                </button>
+            </div>
+            <hr>
+            <div class="dropdown">
+                <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"> 
+                    <i class="bi bi-person-circle me-2"></i>                 
+                    <strong class="me-2">
+                        Cristian Labrín Martínez
+                    </strong>
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#"><i class="bi bi-x-circle me-2"></i> Cerrar Sesión</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- TABLAS DE DATOS -->
+    <div class="bg-light text-white p-3" style="width: 1920px; height: 100vh;">
+        <div class="tab-content" id="v-pills-tabContent">
+            <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab" tabindex="0">
+                <div class="row">
+                    <div class="col-12">
+                        <!-- <div class="card">
+                            <div class="card-header">
+
+                            </div>
+                            <div class="card-body">
+
+                            </div>
+                        </div> -->
+                    </div>
+                    <div class="col-12">
+                        <h3 class="text-dark">Vehículos asignados</h3>
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th class="text-center">Patente</th>
+                                <th class="text-center">Marca</th>
+                                <th class="text-center">Modelo</th>
+                                <th class="text-center">Año</th>
+                                <th class="text-center">Color</th>
+                                <th class="text-center">Kilometraje</th>
+                                <th class="text-center">Disponibilidad</th>
+                                <th></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td class="text-center">ABCD-11</td>
+                                <td class="text-center">Toyota</td>
+                                <td class="text-center">Yaris</td>
+                                <td class="text-center">2022</td>
+                                <td class="text-center">Rojo</td>
+                                <td class="text-center">25.000</td>
+                                <td class="text-center"><span class="badge rounded-pill text-bg-success">Disponible</span></td>
+                                <td class="text-center">
+                                    <button id="btnModalViaje" class="btn btn-outline-dark btn-sm">Iniciar viaje</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="text-center">PKTW-63</td>
+                                <td class="text-center">Toyota</td>
+                                <td class="text-center">RAV4</td>
+                                <td class="text-center">2021</td>
+                                <td class="text-center">PLATA</td>
+                                <td class="text-center">69.500</td>
+                                <td class="text-center"><span class="badge rounded-pill text-bg-danger">En uso</span></td>
+                                <td class="text-center">
+                                    <button id="btnModalViaje" class="btn btn-outline-dark btn-sm" disabled>Iniciar viaje</button>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab" tabindex="0">
+                <h3 class="text-dark">Mis viajes realizados</h3>
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th class="text-center">Vehículo</th>
+                        <th class="text-center">KM Inicio</th>
+                        <th class="text-center">KM Fin</th>
+                        <th class="text-center">Fecha Inicio</th>
+                        <th class="text-center">Fecha Fin</th>
+                        <th class="text-center">Cargó Bencina</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td class="text-center">Toyota Yaris</td>
+                        <td class="text-center">25.000</td>
+                        <td class="text-center">25.120</td>
+                        <td class="text-center">24-03-2026 10:00:00</td>
+                        <td class="text-center">27-03-2026 12:00:00</td>
+                        <td class="text-center">SI</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="tab-pane fade" id="v-pills-disabled" role="tabpanel" aria-labelledby="v-pills-disabled-tab" tabindex="0">
+                <h3 class="text-dark">Cargas de combustible</h3>
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th class="text-center">Vehículo</th>
+                        <th class="text-center">Tipo combustible</th>
+                        <th class="text-center">Cantidad litros</th>
+                        <th class="text-center">Monto</th>
+                        <th class="text-center"></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td class="text-center">Toyota Yaris</td>
+                        <td class="text-center">93</td>
+                        <td class="text-center">40</td>
+                        <td class="text-center">$50.000</td>
+                        <td class="text-center">
+                            <button id="btnModalViaje" class="btn btn-outline-dark btn-sm"><i class="bi bi-box-arrow-down"></i> Descargar boleta</button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab" tabindex="0">
+                <h3 class="text-dark">Administración</h3>
+                <p class="text-dark">Aquí irá gestión de usuarios y vehículos</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- MODAL VIAJE -->
+<div class="modal fade" id="modalViaje" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5>Iniciar viaje</h5>
+      </div>
+      <div class="modal-body">
+        <input type="number" class="form-control" placeholder="Kilometraje inicio">
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-primary">Guardar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <title>Login</title>
+
+        <!-- Bootstrap -->
+        <link href="./css/estilo.css" rel="stylesheet">
+        <link href="./node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+        <script src="./node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="./node_modules/jquery/dist/jquery.min.js"></script>
+        <link href="./node_modules/bootstrap-icons/font/bootstrap-icons.min.css" rel="stylesheet">
+
+        <!-- js -->
+        <script src="./js/login.js"></script>
+    </head>
+    <body class="bg-navy">
+
+    <div class="container d-flex vh-100 justify-content-center align-items-center">
+        <div class="card p-4 shadow" style="width: 350px;">
+            <h3 class="text-center mb-3"><i class="bi bi-car-front me-2"></i>Bitácora Vehicular</h3>
+            <form>
+                <div class="form-floating">
+                    <input type="email" id="" class="form-control form-signin-email" placeholder="name@example.com">
+                    <label for="floatingInput">Correo</label>
+                </div>
+                <div class="form-floating">
+                    <input type="password" id="" class="form-control form-signin-psswrd" placeholder="Contraseña">
+                    <label for="floatingPassword">Contraseña</label>
+                </div>
+                <button id="btnInicioSesion" type="button" class="btn btn-brand-blue w-100 mt-3"> Iniciar sesión </button>
+            </form>
+            <br>
+            <div class="d-flex justify-content-center align-items-center">
+                <a href="registro.html">¿No tienes cuenta? Regístrate</a>
+            </div>
+        </div>
+    </div>
+    </body>
+</html>
