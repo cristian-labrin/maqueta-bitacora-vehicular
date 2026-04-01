@@ -1,195 +1,1955 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>Bitácora Vehicular</title>
-    <link href="./css/estilo.css" rel="stylesheet">
-    <link href="./node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="./node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="./node_modules/jquery/dist/jquery.min.js"></script>
-    <link href="./node_modules/bootstrap-icons/font/bootstrap-icons.min.css" rel="stylesheet">
-    <script src="./js/index.js"></script>
-</head>
+    <head>
+        <meta charset="UTF-8">
+        
+        <!-- TÍTULO PÁGINA -->
+        <title>Bitácora Vehicular</title>
 
-<body>
+        <!-- FAVICON -->
+        <link rel="icon" type="image/x-icon" href="./img/favicon.ico">
 
-<div class="d-flex">
-    <div class="bg-navy">
-        <!-- COLLAPSE SIDEBAR -->
-        <div class="px-3 pt-3">
-            <h3><i id="btnCollapseMenu" class="bi bi-list text-white"></i> <span id="spBitacora" class="ms-2 text-white">Bitácora</span></h3>
-        </div>
-        <!-- SIDEBAR -->
-        <div id="sidebar" class="sidebar bg-navy text-white px-3" style="width: 250px; height: 100vh;">
-            <!--<h3><i class="bi bi-journal-text"></i> Bitácora</h3> -->
-            <hr>  
-            <div class="nav nav-pills flex-column mb-auto" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                <button id="btnVehiculo" class="nav-link text-start active" id="v-pills-home-tab" data-bs-toggle="pill" data-bs-target="#v-pills-home" type="button" role="tab" aria-controls="v-pills-home" aria-selected="true">
-                    <i class="bi bi-car-front me-2" data-tooltip="Vehículos"></i>
-                    <span>Vehículos</span>
-                </button>
-                <button id="btnViaje" class="nav-link text-start" id="v-pills-profile-tab" data-bs-toggle="pill" data-bs-target="#v-pills-profile" type="button" role="tab" aria-controls="v-pills-profile" aria-selected="false">
-                    <i class="bi bi-map me-2" data-tooltip="Viajes"></i>
-                    <span>Viajes</span>
-                </button>
-                <button id="btnCargas" class="nav-link text-start" id="v-pills-disabled-tab" data-bs-toggle="pill" data-bs-target="#v-pills-disabled" type="button" role="tab" aria-controls="v-pills-disabled" aria-selected="false">
-                    <i class="bi bi-fuel-pump me-2" data-tooltip="Cargas"></i>
-                    <span>Cargas</span>
-                </button>
-                <button id="btnAdmin" class="nav-link text-start" id="v-pills-messages-tab" data-bs-toggle="pill" data-bs-target="#v-pills-messages" type="button" role="tab" aria-controls="v-pills-messages" aria-selected="false">
-                    <i class="bi bi-person-gear me-2" data-tooltip="Administración"></i>
-                    <span>Administración</span>
-                </button>
+        <!-- SCRIPTS -->
+        <script src="./node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="./node_modules/jquery/dist/jquery.min.js"></script>
+        <script src="./js/index.js"></script>
+
+        <!-- CSS -->
+        <link href="./css/estilo.css" rel="stylesheet">
+        <link href="./node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link href="./node_modules/bootstrap-icons/font/bootstrap-icons.min.css" rel="stylesheet">
+    </head>
+    <body>
+        <div class="d-flex">
+            <!-- MENÚ -->
+            <div class="bg-navy d-flex flex-column vh-100">
+                <!-- COLLAPSE SIDEBAR -->
+                <div id="sidebarHeader" class="px-3 pt-3">
+                    <div class="sidebar-icon-slot text-white">
+                        <i id="btnCollapseMenu" class="bi bi-list"></i>
+                        <span id="spBitacora" class="sidebar-title ms-2">Bitácora</span>
+                    </div>
+                </div>
+                <!-- SIDEBAR -->
+                <div id="sidebar" class="sidebar bg-navy text-white px-3 d-flex flex-column flex-grow-1" style="width: 250px;">
+                    <hr>
+                    <!-- OPCIONES DE MENÚ -->
+                    <div class="nav nav-pills flex-column mb-auto" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                        <button id="btnVehiculo" class="nav-link text-start active" id="v-pills-home-tab" data-bs-toggle="pill" data-bs-target="#v-pills-vehiculos" type="button" role="tab" aria-controls="v-pills-vehiculos" aria-selected="true">
+                            <i class="bi bi-car-front me-2" data-tooltip="Vehículos"></i>
+                            <span>Vehículos</span>
+                        </button>
+                        <button id="btnViaje" class="nav-link text-start" id="v-pills-profile-tab" data-bs-toggle="pill" data-bs-target="#v-pills-viajes" type="button" role="tab" aria-controls="v-pills-viajes" aria-selected="false">
+                            <i class="bi bi-map me-2" data-tooltip="Viajes"></i>
+                            <span>Viajes</span>
+                        </button>
+                        <button id="btnCargas" class="nav-link text-start" id="v-pills-disabled-tab" data-bs-toggle="pill" data-bs-target="#v-pills-cargas" type="button" role="tab" aria-controls="v-pills-cargas" aria-selected="false">
+                            <i class="bi bi-fuel-pump me-2" data-tooltip="Cargas"></i>
+                            <span>Cargas</span>
+                        </button>
+                        <button id="btnAdmin" class="nav-link text-start" id="v-pills-messages-tab" data-bs-toggle="pill" data-bs-target="#v-pills-admin" type="button" role="tab" aria-controls="v-pills-admin" aria-selected="false">
+                            <i class="bi bi-person-gear me-2" data-tooltip="Administración"></i>
+                            <span>Administración</span>
+                        </button>
+                        <button id="btnMantenedores" class="nav-link text-start" id="v-pills-mantenedores-tab" data-bs-toggle="pill" data-bs-target="#v-pills-mantenedores" type="button" role="tab" aria-controls="v-pills-mantenedores" aria-selected="false">
+                            <i class="bi bi-database"></i>
+                            <span>Mantenedores</span>
+                        </button>
+                    </div>
+                    <hr class="mt-auto">
+                    <!-- DROPDOWN USUARIO -->
+                    <div id="userMenuWrapper" class="dropdown mb-3">
+                        <a href="#"
+                        class="sidebar-icon-slot text-white text-decoration-none dropdown-toggle"
+                        data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                            <i class="bi bi-person-circle"></i>
+                            <strong class="ms-2 mb-0">clabrin</strong>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#"><i class="bi bi-x-circle me-2 text-danger"></i> Cerrar Sesión</a></li>
+                        </ul>
+                    </div> 
+                </div>
             </div>
-            <hr>
-            <div class="dropdown">
-                <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"> 
-                    <i class="bi bi-person-circle me-2"></i>                 
-                    <strong class="me-2">
-                        Cristian Labrín Martínez
-                    </strong>
-                </a>
-                <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="#"><i class="bi bi-x-circle me-2"></i> Cerrar Sesión</a></li>
-                </ul>
+
+            <!-- TABLAS DE DATOS -->
+            <div class="text-white p-3" style="width: 1920px; height: 100vh;">
+                <div class="tab-content" id="v-pills-tabContent">
+
+                    <!-- TABLA DE VEHÍCULOS -->
+                    <div class="tab-pane fade show active" id="v-pills-vehiculos" role="tabpanel" aria-labelledby="v-pills-vehiculos-tab" tabindex="0">
+                        <div class="row">
+                            <!-- KPI -->
+                            <div class="col-12">
+                                <div class="row mb-3">
+                                    <div class="col-3">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <small>Vehículos disponibles</small>
+                                                <h3>1</h3>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-3">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <small>Vehículos no disponibles</small>
+                                                <h3>0</h3>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-3">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <small>Vehículos en uso</small>
+                                                <h3>1</h3>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-3">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <small>Total vehículos</small>
+                                                <h3>2</h3>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- TABLA VEHÍCULOS -->
+                            <div class="col-12">
+                                <div class="card">
+                                    <div class="card-header card-header-navy">
+                                        <h3>Listado de vehículos</h3>
+                                    </div>
+                                    <div class="card-body">
+                                        <input type="text" class="form-control" placeholder="Buscar patente o modelo...">
+                                        <table class="table table-striped mt-3">
+                                            <thead>
+                                            <tr class="table-navy">
+                                                <th class="text-center">Patente</th>
+                                                <th class="text-center">Marca</th>
+                                                <th class="text-center">Modelo</th>
+                                                <th class="text-center">Año</th>
+                                                <th class="text-center">Color</th>
+                                                <th class="text-center">Kilometraje</th>
+                                                <th class="text-center">Estado</th>
+                                                <th></th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr>
+                                                <td class="text-center">ABCD-11</td>
+                                                <td class="text-center">TOYOTA</td>
+                                                <td class="text-center">YARIS</td>
+                                                <td class="text-center">2022</td>
+                                                <td class="text-center">ROJO</td>
+                                                <td class="text-center">25.000</td>
+                                                <td class="text-center"><span class="badge rounded-pill text-bg-success">Disponible</span></td>
+                                                <td class="text-center">
+                                                    <button id="btnModalViaje" class="btn btn-outline-brand-blue btn-sm inicia-viaje">
+                                                        <i class="bi bi-play-circle me-1"></i>
+                                                        Iniciar viaje
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            <tr class="vehicle-ok">
+                                                <td class="text-center">PKTW-63</td>
+                                                <td class="text-center">TOYOTA</td>
+                                                <td class="text-center">RAV4</td>
+                                                <td class="text-center">2021</td>
+                                                <td class="text-center">PLATA</td>
+                                                <td class="text-center">69.500</td>
+                                                <td class="text-center"><span class="badge rounded-pill text-bg-danger">En uso</span></td>
+                                                <td class="text-center">
+                                                    <button id="" class="btn btn-outline-brand-blue btn-sm inicia-viaje" disabled>
+                                                        <i class="bi bi-play-circle me-1"></i>
+                                                        Iniciar viaje
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- TABLA DE VIAJES -->
+                    <div class="tab-pane fade" id="v-pills-viajes" role="tabpanel" aria-labelledby="v-pills-viajes-tab" tabindex="0">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="row mb-3">
+                                    <div class="col-4">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <small>Viajes abiertos</small>
+                                                <h3>1</h3>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <small>Viajes cerrados</small>
+                                                <h3>1</h3>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <small>Total viajes</small>
+                                                <h3>2</h3>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-12">
+                                <div class="card">
+                                    <div class="card-header card-header-navy">
+                                        <h3>Mis viajes realizados</h3>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <input type="text" class="form-control" placeholder="Buscar por vehículo o fecha...">
+                                            </div>
+                                            <div class="col-6">
+                                                <select class="form-select">
+                                                    <option>TODOS</option>
+                                                    <option>CON BENCINA</option>
+                                                    <option>SIN BENCINA</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <table class="table table-striped mt-3">
+                                            <thead>
+                                                <tr class="table-navy">
+                                                    <th class="text-center">Vehículo</th>
+                                                    <th class="text-center">Kms inicio</th>
+                                                    <th class="text-center">Kms final</th>
+                                                    <th class="text-center">Kms Recorridos</th>
+                                                    <th class="text-center">Fecha/Hora inicio</th>
+                                                    <th class="text-center">Fecha/Hora fin</th>
+                                                    <th class="text-center">Cargó bencina</th>
+                                                    <th class="text-center">Duración</th>
+                                                    <th class="text-center">Estado</th>
+                                                    <th></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td class="text-center">TOYOTA YARIS</td>
+                                                    <td class="text-center">25.000</td>
+                                                    <td class="text-center">25.120</td>
+                                                    <td class="text-center fw-bold">120</td>
+                                                    <td class="text-center">24-03-2026 10:00</td>
+                                                    <td class="text-center">27-03-2026 12:00</td>
+                                                    <td class="text-center"><span class="badge rounded-pill text-bg-success">Sí</span></td>
+                                                    <td class="text-center">1 día 23 hrs</td>
+                                                    <td class="text-center">
+                                                        <span class="badge rounded-pill text-bg-success">Abierto</span>
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <button class="btn btn-outline-dark btn-sm" id="btnDetalleViaje">
+                                                            <i class="bi bi-eye"></i>
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-center">TOYOTA RAV4</td>
+                                                    <td class="text-center">68.900</td>
+                                                    <td class="text-center">69.500</td>
+                                                    <td class="text-center fw-bold">600</td>
+                                                    <td class="text-center">14-03-2026 10:56</td>
+                                                    <td class="text-center">27-03-2026 12:00</td>
+                                                    <td class="text-center"><span class="badge rounded-pill text-bg-secondary">No</span></td>
+                                                    <td class="text-center">2 días 2 hrs</td>
+                                                    <td class="text-center">
+                                                        <span class="badge rounded-pill text-bg-danger">Cerrado</span>
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <button class="btn btn-outline-dark btn-sm" id="btnDetalleViaje">
+                                                            <i class="bi bi-eye"></i>
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- TABLA DE CARGA DE COMBUSTIBLES -->
+                    <div class="tab-pane fade" id="v-pills-cargas" role="tabpanel" aria-labelledby="v-pills-cargas-tab" tabindex="0">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="row mb-3">
+                                    <div class="col-4">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <small>Total cargas</small>
+                                                <h3>1</h3>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <small>Total cargas del mes</small>
+                                                <h3>0</h3>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <small>Gasto de <Strong>Abril</Strong></small>
+                                                <h3>$0</h3>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="card">
+                                    <div class="card-header card-header-navy">
+                                        <h3>Cargas de combustible</h3>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <div class="row">
+                                                    <div class="col-6">
+                                                        <label class="form-label fw-semibold">Fecha desde</label>
+                                                        <input id="fechaDesde" type="date" class="form-control">
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <label class="form-label fw-semibold">Fecha hasta</label>
+                                                        <input id="fechaHasta" type="date" class="form-control">
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <table class="table table-striped mt-3">
+                                            <thead>
+                                            <tr class="table-navy">
+                                                <th class="text-center">Vehículo</th>
+                                                <th class="text-center">Patente</t h>
+                                                <th class="text-center">Tipo combustible</th>
+                                                <th class="text-center">Cantidad litros</th>
+                                                <th class="text-center">Monto</th>
+                                                <th class="text-center">Fecha carga</th>
+                                                <th class="text-center"></th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr>
+                                                <td class="text-center">TOYOTA YARIS</td>
+                                                <td class="text-center">ABCD-11</td>
+                                                <td class="text-center">93</td>
+                                                <td class="text-center">40</td>
+                                                <td class="text-center">$50.000</td>
+                                                <td class="text-center">24-03-2026 12:00</td>
+                                                <td class="text-center">
+                                                    <button class="btn btn-outline-danger btn-sm">
+                                                        <i class="bi bi-file-earmark-pdf me-1"></i> Ver boleta
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- PANEL DE ADMINISTRACIÓN -->
+                    <div class="tab-pane fade" id="v-pills-admin" role="tabpanel" aria-labelledby="v-pills-admin-tab" tabindex="0">
+                        <div class="container-fluid px-0">
+
+                            <!-- KPIs -->
+                            <div class="row g-3 mb-4">
+                                <div class="col-2">
+                                    <div class="card shadow-sm border-0 admin-kpi-card">
+                                        <div class="card-body">
+                                            <small class="text-muted">Total usuarios</small>
+                                            <h2 class="mb-0 fw-bold">27</h2>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-2">
+                                    <div class="card shadow-sm border-0 admin-kpi-card">
+                                        <div class="card-body">
+                                            <small class="text-muted">Total Vehículos</small>
+                                            <h2 class="mb-0 fw-bold">4</h2>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-2">
+                                    <div class="card shadow-sm border-0 admin-kpi-card">
+                                        <div class="card-body">
+                                            <small class="text-muted">Usuarios habilitados</small>
+                                            <h2 class="mb-0 fw-bold">20</h2>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-2">
+                                    <div class="card shadow-sm border-0 admin-kpi-card">
+                                        <div class="card-body">
+                                            <small class="text-muted">Vehículos disponibles</small>
+                                            <h2 class="mb-0 fw-bold text-success">2</h2>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-2">
+                                    <div class="card shadow-sm border-0 admin-kpi-card">
+                                        <div class="card-body">
+                                            <small class="text-muted">Vehículos en manteción</small>
+                                            <h2 class="mb-0 fw-bold text-warning">0</h2>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-2">
+                                    <div class="card shadow-sm border-0 admin-kpi-card">
+                                        <div class="card-body">
+                                            <small class="text-muted">Vehículos no disponibles</small>
+                                            <h2 class="mb-0 fw-bold text-danger">0</h2>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- ACCESOS RÁPIDOS - FILA 1 -->
+                            <div class="row g-3 mb-4">
+                                <div class="col-md-4">
+                                    <div class="card shadow-sm border-0 h-100 admin-action-card">
+                                        <div class="card-header card-header-navy">
+                                            <i class="bi bi-car-front me-2"></i> Gestión de vehículos
+                                        </div>
+                                        <div class="card-body d-flex flex-column">
+                                            <p class="text-muted mb-3 texto-justificado">
+                                                Administra disponibilidad, estado, kilometraje y mantención de la flota.
+                                            </p>
+                                            <div class="mt-auto">
+                                                <button id="btnGestionVehiculos" class="btn btn-outline-brand-blue btn-sm">
+                                                    <i class="bi bi-arrow-right-circle me-1"></i> Abrir gestión
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div class="card shadow-sm border-0 h-100 admin-action-card">
+                                        <div class="card-header card-header-navy">
+                                            <i class="bi bi-people me-2"></i> Gestión de usuarios
+                                        </div>
+                                        <div class="card-body d-flex flex-column">
+                                            <p class="text-muted mb-3 texto-justificado">
+                                                Activa, desactiva y controla el acceso de los usuarios del sistema.
+                                            </p>
+                                            <div class="mt-auto">
+                                                <button id="btnGestionUsuarios" class="btn btn-outline-brand-blue btn-sm">
+                                                    <i class="bi bi-arrow-right-circle me-1"></i> Abrir gestión
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div class="card shadow-sm border-0 h-100 admin-action-card">
+                                        <div class="card-header card-header-navy">
+                                            <i class="bi bi-link-45deg me-2"></i> Asignaciones
+                                        </div>
+                                        <div class="card-body d-flex flex-column">
+                                            <p class="text-muted mb-3 texto-justificado">
+                                                Asigna, quita o reasigna vehículos a los usuarios habilitados.
+                                            </p>
+                                            <div class="mt-auto">
+                                                <button id="btnAsignaciones" class="btn btn-outline-brand-blue btn-sm">
+                                                    <i class="bi bi-arrow-right-circle me-1"></i> Abrir asignaciones
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- ACCESOS RÁPIDOS - FILA 2 -->
+                            <div class="row g-3 mb-4">
+                                <div class="col-md-4">
+                                    <div class="card shadow-sm border-0 h-100 admin-action-card">
+                                        <div class="card-header card-header-navy">
+                                            <i class="bi bi-map me-2"></i> Viajes activos
+                                        </div>
+                                        <div class="card-body d-flex flex-column">
+                                            <p class="text-muted mb-3">
+                                                Consulta viajes abiertos y realiza cierres manuales si corresponde.
+                                            </p>
+                                            <div class="mt-auto">
+                                                <button id="btnViajesActivos" class="btn btn-outline-brand-blue btn-sm">
+                                                    <i class="bi bi-arrow-right-circle me-1"></i> Ver viajes
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div class="card shadow-sm border-0 h-100 admin-action-card">
+                                        <div class="card-header card-header-navy">
+                                            <i class="bi bi-exclamation-triangle me-2"></i> Alertas de mantención
+                                        </div>
+                                        <div class="card-body d-flex flex-column">
+                                            <p class="text-muted mb-3 texto-justificado">
+                                                Detecta vehículos cercanos o pasados de mantención por kilometraje.
+                                            </p>
+                                            <div class="mt-auto">
+                                                <button id="btnAlertasMantencion" class="btn btn-outline-brand-blue btn-sm">
+                                                    <i class="bi bi-arrow-right-circle me-1"></i> Ver alertas
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div class="card shadow-sm border-0 h-100 admin-action-card">
+                                        <div class="card-header card-header-navy">
+                                            <i class="bi bi-slash-circle me-2"></i> Fuera de servicio
+                                        </div>
+                                        <div class="card-body d-flex flex-column">
+                                            <p class="text-muted mb-3 texto-justificado">
+                                                Visualiza vehículos deshabilitados, bloqueados o enviados a revisión.
+                                            </p>
+                                            <div class="mt-auto">
+                                                <button id="btnFueraServicio" class="btn btn-outline-brand-blue btn-sm">
+                                                    <i class="bi bi-arrow-right-circle me-1"></i> Ver vehículos
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- RESUMEN OPERATIVO -->
+                            <div class="row g-3 align-items-stretch">
+                                <div class="col-lg-7 d-flex">
+                                    <div class="card card-admin h-100 w-100">
+                                        <div class="card-header card-header-navy">
+                                            <i class="bi bi-tools me-2"></i>
+                                            Vehículos próximos a mantención
+                                        </div>
+                                        <div class="card-body p-0">
+                                            <div class="tabla-mantencion-wrapper">
+                                                <table class="table table-hover align-middle mb-0 tabla-mantencion">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Patente</th>
+                                                            <th>Vehículo</th>
+                                                            <th>Kilometraje</th>
+                                                            <th>Estado</th>
+                                                            <th>Acción</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>ABCD-11</td>
+                                                            <td>Toyota Yaris</td>
+                                                            <td>29.800</td>
+                                                            <td><span class="badge bg-warning text-dark">Próxima mantención</span></td>
+                                                            <td>
+                                                                <button 
+                                                                    class="btn btn-outline-primary btn-sm btn-ver-detalle-mantencion"
+                                                                    data-id="1"
+                                                                    data-vehiculo="Toyota Yaris"
+                                                                    data-patente="ABCD-11"
+                                                                    data-kilometraje="29800"
+                                                                    data-estado="Próxima mantención">
+                                                                    <i class="bi bi-eye"></i> Ver
+                                                                </button>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>PKTW-63</td>
+                                                            <td>Toyota RAV4</td>
+                                                            <td>69.500</td>
+                                                            <td><span class="badge bg-danger">Urgente</span></td>
+                                                            <td><button class="btn btn-outline-primary btn-sm"><i class="bi bi-eye"></i> Ver</button></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>LJHG-22</td>
+                                                            <td>Chevrolet Groove</td>
+                                                            <td>14.900</td>
+                                                            <td><span class="badge bg-success">Normal</span></td>
+                                                            <td><button class="btn btn-outline-primary btn-sm"><i class="bi bi-eye"></i> Ver</button></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>ZXCV-99</td>
+                                                            <td>Kia Sportage</td>
+                                                            <td>54.200</td>
+                                                            <td><span class="badge bg-warning text-dark">Próxima mantención</span></td>
+                                                            <td><button class="btn btn-outline-primary btn-sm"><i class="bi bi-eye"></i> Ver</button></td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-5 d-flex">
+                                    <div class="card card-admin h-100 w-100">
+                                        <div class="card-header card-header-navy">
+                                            <i class="bi bi-info-circle me-2"></i>
+                                            Observaciones administrativas
+                                        </div>
+
+                                        <div class="card-body">
+                                            <ul class="mb-0 ps-3 lista-observaciones">
+                                                <li>3 usuarios no tienen vehículo asignado.</li>
+                                                <li>1 viaje permanece abierto hace más de 24 horas.</li>
+                                                <li>2 vehículos están deshabilitados por revisión.</li>
+                                                <li>1 vehículo requiere confirmación de mantención urgente.</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- MANTENEDORES -->
+                     <div class="tab-pane fade" id="v-pills-mantenedores" role="tabpanel" aria-labelledby="v-pills-mantenedores-tab" tabindex="0">
+                        <h3 class="text-dark">MANTENEDORES</h3>
+                     </div>
+                </div>
             </div>
         </div>
-    </div>
 
-    <!-- TABLAS DE DATOS -->
-    <div class="bg-light text-white p-3" style="width: 1920px; height: 100vh;">
-        <div class="tab-content" id="v-pills-tabContent">
-            <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab" tabindex="0">
-                <div class="row">
-                    <div class="col-12">
-                        <!-- <div class="card">
-                            <div class="card-header">
+        <!-- MODAL VIAJE -->
+        <div id="mdlViaje" class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
 
+                <!-- CABECERA MODAL -->
+                <div class="modal-header bg-navy text-light">
+                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Confirmar Inicio de Viaje</h1>
+                    <button type="button" class="btn-close btn-close-white limpia-viaje" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <!-- CUERPO MODAL -->
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-4">
+                            <label for="txtVehiculo" class="form-label">Vehículo</label>
+                            <input id="txtVehiculo" type="text" class="form-control" value="TOYOTA YARIS 2022" disabled>
+                        </div>
+                        <div class="col-4">
+                            <label for="txtVehiculo" class="form-label">Patente</label>
+                            <input id="txtVehiculo" type="text" class="form-control" value="ABCD-11" disabled>
+                        </div>
+                        <div class="col-4">
+                            <label for="txtUsuario" class="form-label">Usuario</label>
+                            <input id="txtUsuario" type="text" class="form-control" value="CLABRIN" disabled>
+                        </div>
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col-4">
+                            <label for="txtFechaActual" class="form-label">Fecha de inicio</label>
+                            <input id="txtFechaActual" type="date" class="form-control" disabled>
+                        </div>
+                        <div class="col-4">
+                            <label for="txtHoraActual" class="form-label">Hora de inicio</label>
+                            <input id="txtHoraActual" type="text" class="form-control" disabled>
+                        </div>
+                        <div class="col-4">
+                            <label for="txtKilometrajeInicial" class="form-label">Kilometraje inicial</label>
+                            <input id="txtKilometrajeInicial" type="text" class="form-control" value="25.000" disabled>
+                        </div>
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col-12">
+                            <label for="txtarObservacion" class="form-label">Observación (opcional)</label>
+                            <textarea id="txtarObservacion" class="form-control"></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FOOTER MODAL -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger px-4 limpia-viaje" data-bs-dismiss="modal">
+                        <i class="bi bi-x-circle me-1"></i> 
+                        Cerrar
+                    </button>
+                    <button type="button" class="btn btn-success px-4 limpia-viaje" id="btnConfirmarInicioViaje">
+                        <i class="bi bi-play-circle me-1"></i> 
+                        Iniciar
+                    </button>
+                </div>
+            </div>
+        </div>
+        </div>
+
+        <!-- MODAL DETALLE VIAJE -->
+        <div id="mdlDetalleViaje" class="modal fade" tabindex="-1">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+
+                    <div class="modal-header bg-navy text-light">
+                        <h5 class="modal-title">Detalle del viaje</h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                    </div>
+
+                    <div class="modal-body">
+
+                        <!-- RESUMEN VIAJE -->
+                        <div class="card mb-3">
+                            <div class="card-header card-header-navy">
+                                Resumen del viaje
                             </div>
                             <div class="card-body">
-
+                                <div class="row g-3">
+                                    <div class="col-md-4">
+                                        <label class="form-label fw-semibold">Vehículo</label>
+                                        <input class="form-control" value="Toyota Yaris" readonly>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label class="form-label fw-semibold">Kms inicio</label>
+                                        <input class="form-control" value="25.000" readonly>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label class="form-label fw-semibold">Kms fin</label>
+                                        <input class="form-control" value="25.120" readonly>
+                                    </div> 
+                                </div>
                             </div>
-                        </div> -->
+                        </div>
+
+                        <!-- CARGA -->
+                        <div class="card">
+                            <div class="card-header card-header-navy">
+                                Carga de combustible asociada
+                            </div>
+                            <div class="card-body">
+                                <div class="row g-3">
+                                    <div class="col-md-4">
+                                        <label class="form-label fw-semibold">Tipo combustible</label>
+                                        <input class="form-control" value="93" readonly>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label class="form-label fw-semibold">Litros</label>
+                                        <input class="form-control" value="40" readonly>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label class="form-label fw-semibold">Monto</label>
+                                        <input class="form-control" value="$50.000" readonly>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
-                    <div class="col-12">
-                        <h3 class="text-dark">Vehículos asignados</h3>
-                        <table class="table table-striped">
-                            <thead>
-                            <tr>
-                                <th class="text-center">Patente</th>
-                                <th class="text-center">Marca</th>
-                                <th class="text-center">Modelo</th>
-                                <th class="text-center">Año</th>
-                                <th class="text-center">Color</th>
-                                <th class="text-center">Kilometraje</th>
-                                <th class="text-center">Disponibilidad</th>
-                                <th></th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td class="text-center">ABCD-11</td>
-                                <td class="text-center">Toyota</td>
-                                <td class="text-center">Yaris</td>
-                                <td class="text-center">2022</td>
-                                <td class="text-center">Rojo</td>
-                                <td class="text-center">25.000</td>
-                                <td class="text-center"><span class="badge rounded-pill text-bg-success">Disponible</span></td>
-                                <td class="text-center">
-                                    <button id="btnModalViaje" class="btn btn-outline-dark btn-sm">Iniciar viaje</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="text-center">PKTW-63</td>
-                                <td class="text-center">Toyota</td>
-                                <td class="text-center">RAV4</td>
-                                <td class="text-center">2021</td>
-                                <td class="text-center">PLATA</td>
-                                <td class="text-center">69.500</td>
-                                <td class="text-center"><span class="badge rounded-pill text-bg-danger">En uso</span></td>
-                                <td class="text-center">
-                                    <button id="btnModalViaje" class="btn btn-outline-dark btn-sm" disabled>Iniciar viaje</button>
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger px-4" data-bs-dismiss="modal">
+                            <i class="bi bi-x-circle me-1"></i> 
+                            Cerrar
+                        </button>
                     </div>
                 </div>
             </div>
-            <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab" tabindex="0">
-                <h3 class="text-dark">Mis viajes realizados</h3>
-                <table class="table table-striped">
-                    <thead>
-                    <tr>
-                        <th class="text-center">Vehículo</th>
-                        <th class="text-center">KM Inicio</th>
-                        <th class="text-center">KM Fin</th>
-                        <th class="text-center">Fecha Inicio</th>
-                        <th class="text-center">Fecha Fin</th>
-                        <th class="text-center">Cargó Bencina</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td class="text-center">Toyota Yaris</td>
-                        <td class="text-center">25.000</td>
-                        <td class="text-center">25.120</td>
-                        <td class="text-center">24-03-2026 10:00:00</td>
-                        <td class="text-center">27-03-2026 12:00:00</td>
-                        <td class="text-center">SI</td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div class="tab-pane fade" id="v-pills-disabled" role="tabpanel" aria-labelledby="v-pills-disabled-tab" tabindex="0">
-                <h3 class="text-dark">Cargas de combustible</h3>
-                <table class="table table-striped">
-                    <thead>
-                    <tr>
-                        <th class="text-center">Vehículo</th>
-                        <th class="text-center">Tipo combustible</th>
-                        <th class="text-center">Cantidad litros</th>
-                        <th class="text-center">Monto</th>
-                        <th class="text-center"></th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td class="text-center">Toyota Yaris</td>
-                        <td class="text-center">93</td>
-                        <td class="text-center">40</td>
-                        <td class="text-center">$50.000</td>
-                        <td class="text-center">
-                            <button id="btnModalViaje" class="btn btn-outline-dark btn-sm"><i class="bi bi-box-arrow-down"></i> Descargar boleta</button>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab" tabindex="0">
-                <h3 class="text-dark">Administración</h3>
-                <p class="text-dark">Aquí irá gestión de usuarios y vehículos</p>
+        </div>
+
+        <!-- MODAL GESTIÓN VEHÍCULOS -->
+        <div id="mdlGestionVehiculos" class="modal fade" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-fullscreen">
+                <div class="modal-content">
+                    <div class="modal-header bg-navy text-light">
+                        <h5 class="modal-title">
+                            <i class="bi bi-car-front me-2"></i>
+                            Gestión de vehículos
+                        </h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+
+                    <div class="modal-body bg-light">
+                        <div class="container-fluid">
+
+                            <!-- filtros -->
+                            <div class="card shadow-sm border-0 mb-4">
+                                <div class="card-header card-header-navy">
+                                    Filtros de búsqueda
+                                </div>
+                                <div class="card-body">
+                                    <div class="row g-3">
+                                        <div class="col-md-3">
+                                            <label class="form-label fw-semibold">Patente</label>
+                                            <input type="text" class="form-control" placeholder="Buscar patente">
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label class="form-label fw-semibold">Marca</label>
+                                            <select class="form-select">
+                                                <option selected>Todas</option>
+                                                <option>Toyota</option>
+                                                <option>Chevrolet</option>
+                                                <option>Hyundai</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label class="form-label fw-semibold">Estado</label>
+                                            <select class="form-select">
+                                                <option selected>Todos</option>
+                                                <option>Disponible</option>
+                                                <option>En uso</option>
+                                                <option>Deshabilitado</option>
+                                                <option>Fuera de servicio</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-3 d-flex align-items-end">
+                                            <button class="btn btn-dark me-2">
+                                                <i class="bi bi-search me-1"></i> 
+                                                Buscar
+                                            </button>
+                                            <button class="btn btn-dark">
+                                                <i class="bi bi-trash"></i>
+                                                Limpiar
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- acciones -->
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <h4 class="text-dark mb-0">Listado de vehículos</h4>
+                                <button id="btnNuevoVehiculo" class="btn btn-success">
+                                    <i class="bi bi-plus-circle me-1"></i> 
+                                    Nuevo vehículo
+                                </button>
+                            </div>
+
+                            <!-- tabla -->
+                            <div class="card shadow-sm border-0">
+                                <div class="card-body p-0">
+                                    <table class="table table-hover mb-0">
+                                        <thead>
+                                            <tr class="table-navy">
+                                                <th class="text-center">Patente</th>
+                                                <th class="text-center">Marca</th>
+                                                <th class="text-center">Modelo</th>
+                                                <th class="text-center">Año</th>
+                                                <th class="text-center">Kilometraje</th>
+                                                <th class="text-center">Estado</th>
+                                                <th class="text-center">Acciones</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td class="text-center">ABCD-11</td>
+                                                <td class="text-center">Toyota</td>
+                                                <td class="text-center">Yaris</td>
+                                                <td class="text-center">2022</td>
+                                                <td class="text-center">29.800</td>
+                                                <td class="text-center"><span class="badge rounded-pill text-bg-success">Disponible</span></td>
+                                                <td class="text-center">
+                                                    <button class="btn btn-outline-brand-blue btn-sm me-1 btnEditarVehiculo"
+                                                            data-patente="ABCD-11"
+                                                            data-marca="Toyota"
+                                                            data-modelo="Yaris"
+                                                            data-anio="2022"
+                                                            data-km="29800"
+                                                            data-estado="Disponible">
+                                                        <i class="bi bi-pencil"></i>
+                                                    </button>
+
+                                                    <button class="btn btn-outline-warning btn-sm me-1 btnMantencionVehiculo"
+                                                            data-patente="ABCD-11"
+                                                            data-vehiculo="Toyota Yaris">
+                                                        <i class="bi bi-tools"></i>
+                                                    </button>
+
+                                                    <button class="btn btn-outline-danger btn-sm btnDeshabilitarVehiculo"
+                                                            data-patente="ABCD-11"
+                                                            data-vehiculo="Toyota Yaris">
+                                                        <i class="bi bi-slash-circle"></i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-center">PKTW-63</td>
+                                                <td class="text-center">Toyota</td>
+                                                <td class="text-center">RAV4</td>
+                                                <td class="text-center">2021</td>
+                                                <td class="text-center">69.500</td>
+                                                <td class="text-center"><span class="badge rounded-pill text-bg-danger">En uso</span></td>
+                                                <td class="text-center">
+                                                    <button class="btn btn-outline-brand-blue btn-sm me-1"><i class="bi bi-pencil"></i></button>
+                                                    <button class="btn btn-outline-warning btn-sm me-1"><i class="bi bi-tools"></i></button>
+                                                    <button class="btn btn-outline-danger btn-sm"><i class="bi bi-slash-circle"></i></button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-center">LJHG-22</td>
+                                                <td class="text-center">Chevrolet</td>
+                                                <td class="text-center">Groove</td>
+                                                <td class="text-center">2023</td>
+                                                <td class="text-center">14.900</td>
+                                                <td class="text-center"><span class="badge rounded-pill text-bg-secondary">Deshabilitado</span></td>
+                                                <td class="text-center">
+                                                    <button class="btn btn-outline-brand-blue btn-sm me-1 btnEditarVehiculo"
+                                                            data-patente="LJHG-22"
+                                                            data-marca="Chevrolet"
+                                                            data-modelo="Groove"
+                                                            data-anio="2023"
+                                                            data-km="14900"
+                                                            data-estado="Deshabilitado">
+                                                        <i class="bi bi-pencil"></i>
+                                                    </button>
+
+                                                    <button class="btn btn-outline-success btn-sm btnRehabilitarVehiculo"
+                                                            data-patente="LJHG-22"
+                                                            data-vehiculo="Chevrolet Groove">
+                                                        <i class="bi bi-check-circle"></i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
+                            <i class="bi bi-x-circle"></i>
+                            Cerrar
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-</div>
 
-<!-- MODAL VIAJE -->
-<div class="modal fade" id="modalViaje" tabindex="-1">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5>Iniciar viaje</h5>
-      </div>
-      <div class="modal-body">
-        <input type="number" class="form-control" placeholder="Kilometraje inicio">
-      </div>
-      <div class="modal-footer">
-        <button class="btn btn-primary">Guardar</button>
-      </div>
-    </div>
-  </div>
-</div>
+        <!-- MODAL GESTIÓN USUARIOS -->
+        <div id="mdlGestionUsuarios" class="modal fade" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-fullscreen">
+                <div class="modal-content">
+                    <div class="modal-header bg-navy text-light">
+                        <h5 class="modal-title">
+                            <i class="bi bi-people me-2"></i>
+                            Gestión de usuarios
+                        </h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
 
-</body>
+                    <div class="modal-body bg-light">
+                        <div class="container-fluid">
+
+                            <!-- Filtros -->
+                            <div class="card shadow-sm border-0 mb-4">
+                                <div class="card-header card-header-navy">
+                                    Filtros de búsqueda
+                                </div>
+                                <div class="card-body">
+                                    <div class="row g-3">
+                                        <div class="col-md-4">
+                                            <label for="txtFiltroUsuario" class="form-label fw-semibold">Nombre usuario</label>
+                                            <input id="txtFiltroUsuario" type="text" class="form-control" placeholder="Buscar usuario">
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <label for="slcFiltroEstado" class="form-label fw-semibold">Estado</label>
+                                            <select id="slcFiltroEstado" class="form-select">
+                                                <option value="todos" selected>Todos</option>
+                                                <option value="activo">Activo</option>
+                                                <option value="inactivo">Inactivo</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="col-md-4 d-flex align-items-end">
+                                            <button id="btnBuscarUsuario" class="btn btn-dark me-2">
+                                                <i class="bi bi-search me-1"></i> 
+                                                Buscar
+                                            </button>
+                                            <button id="btnLimpiarFiltroUsuario" class="btn btn-dark">
+                                                <i class="bi bi-trash"></i>
+                                                Limpiar
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Encabezado -->
+                            <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
+                                <h4 class="text-dark mb-0">Listado de usuarios</h4>
+                                <button id="btnNuevoUsuario" class="btn btn-success">
+                                    <i class="bi bi-person-plus me-1"></i> 
+                                    Nuevo usuario
+                                </button>
+                            </div>
+
+                            <!-- Tabla -->
+                            <div class="card shadow-sm border-0">
+                                <div class="card-body p-0">
+                                    <div class="table-responsive">
+                                        <table id="tblUsuarios" class="table table-hover mb-0 align-middle">
+                                            <thead>
+                                                <tr class="table-navy">
+                                                    <th class="text-center">Usuario</th>
+                                                    <th class="text-center">Nombre completo</th>
+                                                    <th class="text-center">Rol</th>
+                                                    <th class="text-center">Vehículo asignado</th>
+                                                    <th class="text-center">Estado</th>
+                                                    <th class="text-center">Acciones</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="tbUsuarios">
+                                                <tr>
+                                                    <td class="text-center">clabrin</td>
+                                                    <td class="text-center">Cristian Labrín</td>
+                                                    <td class="text-center">Administrador</td>
+                                                    <td class="text-center">
+                                                        <span class="fw-semibold">Toyota Yaris</span>
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <span class="badge rounded-pill text-bg-success">Activo</span>
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <button class="btn btn-outline-brand-blue btn-sm me-1 btn-editar-usuario" data-usuario="clabrin">
+                                                            <i class="bi bi-pencil"></i>
+                                                        </button>
+                                                        <button class="btn btn-outline-success btn-sm me-1 btn-asignar-vehiculo" data-usuario="clabrin">
+                                                            <i class="bi bi-car-front"></i>
+                                                        </button>
+                                                        <button
+                                                            class="btn btn-outline-secondary btn-sm me-1 btn-quitar-vehiculo"
+                                                            data-usuario="clabrin"
+                                                            title="Quitar vehículo asignado">
+                                                            <i class="bi bi-car-front-fill"></i>
+                                                        </button>
+                                                        <button class="btn btn-outline-warning btn-sm me-1 btn-reset-clave" data-usuario="clabrin">
+                                                            <i class="bi bi-key"></i>
+                                                        </button>
+                                                        <button
+                                                            class="btn btn-outline-danger btn-sm btn-toggle-estado"
+                                                            data-usuario="clabrin"
+                                                            data-estado="activo"
+                                                            title="Deshabilitar usuario">
+                                                            <i class="bi bi-person-slash"></i>
+                                                        </button>
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td class="text-center">jrojas</td>
+                                                    <td class="text-center">Juan Rojas</td>
+                                                    <td class="text-center">Usuario</td>
+                                                    <td class="text-center">
+                                                        <span class="text-muted">Sin asignación</span>
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <span class="badge rounded-pill text-bg-secondary">Inactivo</span>
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <button
+                                                            class="btn btn-outline-brand-blue btn-sm me-1 btn-editar-usuario"
+                                                            data-usuario="jrojas"
+                                                            title="Editar usuario">
+                                                            <i class="bi bi-pencil"></i>
+                                                        </button>
+
+                                                        <button
+                                                            class="btn btn-outline-success btn-sm me-1 btn-asignar-vehiculo"
+                                                            data-usuario="jrojas"
+                                                            title="Asignar vehículo">
+                                                            <i class="bi bi-car-front"></i>
+                                                        </button>
+
+                                                        <button
+                                                            class="btn btn-outline-secondary btn-sm me-1 btn-quitar-vehiculo"
+                                                            data-usuario="jrojas"
+                                                            title="Quitar vehículo asignado"
+                                                            disabled>
+                                                            <i class="bi bi-car-front-fill"></i>
+                                                        </button>
+
+                                                        <button
+                                                            class="btn btn-outline-warning btn-sm me-1 btn-reset-clave"
+                                                            data-usuario="jrojas"
+                                                            title="Restablecer contraseña">
+                                                            <i class="bi bi-key"></i>
+                                                        </button>
+
+                                                        <button
+                                                            class="btn btn-outline-success btn-sm btn-toggle-estado"
+                                                            data-usuario="jrojas"
+                                                            data-estado="inactivo"
+                                                            title="Habilitar usuario">
+                                                            <i class="bi bi-person-check"></i>
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
+                            <i class="bi bi-x-circle"></i>
+                            Cerrar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- MODAL ASIGNACIONES -->
+        <div id="mdlAsignaciones" class="modal fade" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-xl">
+                <div class="modal-content">
+                    <div class="modal-header bg-navy text-light">
+                        <h5 class="modal-title">
+                            <i class="bi bi-link-45deg me-2"></i>Asignación de vehículos
+                        </h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-6 d-flex flex-column">
+                                <div class="card shadow-sm border-0 h-100">
+                                    <div class="card-header card-header-navy">
+                                        Seleccionar usuario
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="mb-3">
+                                            <label for="slcUsuarioAsignacion" class="form-label fw-semibold">Usuario</label>
+                                            <select id="slcUsuarioAsignacion" class="form-select">
+                                                <option value="" selected disabled>Seleccione un usuario</option>
+                                                <option value="1">Cristian Labrín</option>
+                                                <option value="2">Juan Rojas</option>
+                                            </select>
+                                        </div>
+
+                                        <div>
+                                            <label class="form-label fw-semibold">Vehículos asignados actualmente</label>
+
+                                            <div id="lstVehiculosAsignados" class="lista-vehiculos-asignados">
+                                                <div class="item-vehiculo-asignado">
+                                                    <span>Toyota Yaris</span>
+                                                    <button type="button" class="btn btn-outline-danger btn-sm">
+                                                        <i class="bi bi-x-lg"></i>
+                                                    </button>
+                                                </div>
+
+                                                <div class="item-vehiculo-asignado">
+                                                    <span>Chevrolet Groove</span>
+                                                    <button type="button" class="btn btn-outline-danger btn-sm">
+                                                        <i class="bi bi-x-lg"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-6 d-flex flex-column">
+                                <div class="card shadow-sm border-0 d-flex flex-grow-1">
+                                    <div class="card-header card-header-navy">Seleccionar vehículo</div>
+                                    <div class="card-body">
+                                        <label class="form-label fw-semibold">Vehículo disponible</label>
+                                        <select class="form-select mb-3">
+                                            <option selected>Seleccione un vehículo</option>
+                                            <option>Toyota RAV4 - PKTW-63</option>
+                                            <option>Chevrolet Groove - LJHG-22</option>
+                                        </select>
+
+                                        <label class="form-label fw-semibold">Estado</label>
+                                        <input type="text" class="form-control" value="Disponible" readonly>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card shadow-sm border-0 mt-4">
+                            <div class="card-header card-header-navy">Historial de asignaciones</div>
+                            <div class="card-body p-0">
+                                <table class="table table-hover mb-0">
+                                    <thead>
+                                        <tr class="table-navy">
+                                            <th class="text-center">Usuario</th>
+                                            <th class="text-center">Vehículo</th>
+                                            <th class="text-center">Fecha asignación</th>
+                                            <th class="text-center">Estado</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="text-center">Cristian Labrín</td>
+                                            <td class="text-center">Toyota Yaris</td>
+                                            <td class="text-center">01-04-2026</td>
+                                            <td class="text-center"><span class="badge rounded-pill text-bg-success">Activa</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-center">Juan Rojas</td>
+                                            <td class="text-center">Sin asignación</td>
+                                            <td class="text-center">-</td>
+                                            <td class="text-center"><span class="badge rounded-pill text-bg-secondary">Sin asignar</span></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
+                            <i class="bi bi-x-circle"></i>
+                            Cerrar
+                        </button>
+                        <button type="button" class="btn btn-success">
+                            <i class="bi bi-floppy"></i>
+                            Guardar asignación
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- MODAL VIAJES ACTIVOS -->
+        <div id="mdlViajesActivos" class="modal fade" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-xl">
+                <div class="modal-content">
+                    <div class="modal-header bg-navy text-light">
+                        <h5 class="modal-title">
+                            <i class="bi bi-map me-2"></i>Viajes activos
+                        </h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+
+                    <div class="modal-body">
+                        <div class="card shadow-sm border-0">
+                            <div class="card-header card-header-navy">Viajes actualmente en curso</div>
+                            <div class="card-body p-0">
+                                <table class="table table-hover mb-0">
+                                    <thead>
+                                        <tr class="table-navy">
+                                            <th class="text-center">Usuario</th>
+                                            <th class="text-center">Vehículo</th>
+                                            <th class="text-center">Fecha inicio</th>
+                                            <th class="text-center">Hora inicio</th>
+                                            <th class="text-center">KM inicio</th>
+                                            <th class="text-center">Acción</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="text-center">Cristian Labrín</td>
+                                            <td class="text-center">Toyota RAV4</td>
+                                            <td class="text-center">01-04-2026</td>
+                                            <td class="text-center">08:15</td>
+                                            <td class="text-center">69.500</td>
+                                            <td class="text-center">
+                                                <button class="btn btn-outline-danger btn-sm">
+                                                    <i class="bi bi-stop-circle me-1"></i> Cierre manual
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-center">Juan Rojas</td>
+                                            <td class="text-center">Toyota Yaris</td>
+                                            <td class="text-center">01-04-2026</td>
+                                            <td class="text-center">09:00</td>
+                                            <td class="text-center">29.800</td>
+                                            <td class="text-center">
+                                                <button class="btn btn-outline-danger btn-sm">
+                                                    <i class="bi bi-stop-circle me-1"></i> Cierre manual
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
+                            <i class="bi bi-x-circle"></i>
+                            Cerrar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- MODAL ALERTAS DE MANTECIÓN VEHÍCULOS -->
+        <div id="mdlAlertasMantencion" class="modal fade" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-xl">
+                <div class="modal-content">
+                    <div class="modal-header bg-navy text-light">
+                        <h5 class="modal-title">
+                            <i class="bi bi-exclamation-triangle me-2"></i>Alertas de mantención
+                        </h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+
+                    <div class="modal-body">
+                        <div class="card shadow-sm border-0">
+                            <div class="card-header card-header-navy">Vehículos con alerta</div>
+                            <div class="card-body p-0">
+                                <table class="table table-hover mb-0">
+                                    <thead>
+                                        <tr class="table-navy">
+                                            <th class="text-center">Patente</th>
+                                            <th class="text-center">Vehículo</th>
+                                            <th class="text-center">Kilometraje</th>
+                                            <th class="text-center">Tipo alerta</th>
+                                            <th class="text-center">Acción</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="text-center">ABCD-11</td>
+                                            <td class="text-center">Toyota Yaris</td>
+                                            <td class="text-center">29.800</td>
+                                            <td class="text-center"><span class="badge rounded-pill text-bg-warning">Próxima</span></td>
+                                            <td class="text-center">
+                                                <button class="btn btn-outline-warning btn-sm">
+                                                    <i class="bi bi-tools me-1"></i> Marcar mantención
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-center">PKTW-63</td>
+                                            <td class="text-center">Toyota RAV4</td>
+                                            <td class="text-center">69.500</td>
+                                            <td class="text-center"><span class="badge rounded-pill text-bg-danger">Urgente</span></td>
+                                            <td class="text-center">
+                                                <button class="btn btn-outline-warning btn-sm">
+                                                    <i class="bi bi-tools me-1"></i> Marcar mantención
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
+                            <i class="bi bi-x-circle"></i>
+                            Cerrar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- MODAL VEHÍCULOS FUERA DE SERVICIO -->
+         <div id="mdlFueraServicio" class="modal fade" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-xl">
+                <div class="modal-content">
+                    <div class="modal-header bg-navy text-light">
+                        <h5 class="modal-title">
+                            <i class="bi bi-slash-circle me-2"></i>
+                            Vehículos fuera de servicio
+                        </h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+
+                    <div class="modal-body">
+                        <div class="card shadow-sm border-0">
+                            <div class="card-header card-header-navy">Listado de vehículos no disponibles</div>
+                            <div class="card-body p-0">
+                                <table class="table table-hover mb-0">
+                                    <thead>
+                                        <tr class="table-navy">
+                                            <th class="text-center">Patente</th>
+                                            <th class="text-center">Vehículo</th>
+                                            <th class="text-center">Motivo</th>
+                                            <th class="text-center">Estado</th>
+                                            <th class="text-center">Acción</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="text-center">LJHG-22</td>
+                                            <td class="text-center">Chevrolet Groove</td>
+                                            <td class="text-center">En revisión</td>
+                                            <td class="text-center"><span class="badge rounded-pill text-bg-secondary">Fuera de servicio</span></td>
+                                            <td class="text-center">
+                                                <button class="btn btn-outline-success btn-sm">
+                                                    <i class="bi bi-check-circle me-1"></i> 
+                                                    Habilitar
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-center">TRPL-91</td>
+                                            <td class="text-center">Hyundai Accent</td>
+                                            <td class="text-center">Deshabilitado manualmente</td>
+                                            <td class="text-center"><span class="badge rounded-pill text-bg-dark">Bloqueado</span></td>
+                                            <td class="text-center">
+                                                <button class="btn btn-outline-success btn-sm">
+                                                    <i class="bi bi-check-circle me-1"></i> 
+                                                    Habilitar
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
+                            <i class="bi bi-x-circle"></i>    
+                            Cerrar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- MODAL NUEVO VEHÍCULO -->
+         <div id="mdlNuevoVehiculo" class="modal fade modal-overlay-window" tabindex="-1" aria-hidden="true" data-bs-backdrop="static">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header bg-navy text-light">
+                        <h5 class="modal-title">
+                            <i class="bi bi-plus-circle me-2"></i>Nuevo vehículo
+                        </h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                    </div>
+
+                    <div class="modal-body">
+                        <div class="alert alert-light border mb-3">
+                            Complete la información del vehículo para dejarlo disponible en el sistema.
+                        </div>
+
+                        <div class="row g-3">
+                            <div class="col-md-4">
+                                <label for="txtNuevoPatente" class="form-label fw-semibold">Patente</label>
+                                <input type="text" id="txtNuevoPatente" class="form-control" placeholder="Ej: ABCD-11">
+                            </div>
+
+                            <div class="col-md-4">
+                                <label for="txtNuevoMarca" class="form-label fw-semibold">Marca</label>
+                                <input type="text" id="txtNuevoMarca" class="form-control" placeholder="Ej: Toyota">
+                            </div>
+
+                            <div class="col-md-4">
+                                <label for="txtNuevoModelo" class="form-label fw-semibold">Modelo</label>
+                                <input type="text" id="txtNuevoModelo" class="form-control" placeholder="Ej: Yaris">
+                            </div>
+
+                            <div class="col-md-3">
+                                <label for="txtNuevoAnio" class="form-label fw-semibold">Año</label>
+                                <input type="number" id="txtNuevoAnio" class="form-control" placeholder="Ej: 2024">
+                            </div>
+
+                            <div class="col-md-3">
+                                <label for="txtNuevoColor" class="form-label fw-semibold">Color</label>
+                                <input type="text" id="txtNuevoColor" class="form-control" placeholder="Ej: Blanco">
+                            </div>
+
+                            <div class="col-md-3">
+                                <label for="txtNuevoKm" class="form-label fw-semibold">Kilometraje inicial</label>
+                                <input type="number" id="txtNuevoKm" class="form-control" placeholder="Ej: 0">
+                            </div>
+
+                            <div class="col-md-3">
+                                <label for="txtNuevoEstado" class="form-label fw-semibold">Estado</label>
+                                <select id="txtNuevoEstado" class="form-select">
+                                    <option selected>Disponible</option>
+                                    <option>Deshabilitado</option>
+                                    <option>Fuera de servicio</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label for="txtNuevoCombustible" class="form-label fw-semibold">Tipo combustible</label>
+                                <select id="txtNuevoCombustible" class="form-select">
+                                    <option selected>Seleccione</option>
+                                    <option>93</option>
+                                    <option>95</option>
+                                    <option>97</option>
+                                    <option>Diésel</option>
+                                    <option>Eléctrico</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label for="txtNuevoObservacion" class="form-label fw-semibold">Observación</label>
+                                <input type="text" id="txtNuevoObservacion" class="form-control" placeholder="Opcional">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button class="btn btn-danger" data-bs-dismiss="modal">
+                            <i class="bi bi-x-circle"></i>
+                            Cancelar
+                        </button>
+                        <button id="btnGuardarNuevoVehiculo" class="btn btn-success">
+                            <i class="bi bi-floppy me-1"></i> 
+                            Guardar vehículo
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- MODAL EDITAR VEHÍCULO -->
+         <div id="mdlEditarVehiculo" class="modal fade modal-overlay-window" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header bg-navy text-light">
+                        <h5 class="modal-title">
+                            <i class="bi bi-pencil-square me-2"></i>Editar vehículo
+                        </h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                    </div>
+
+                    <div class="modal-body">
+                        <div class="row g-3">
+                            <div class="col-md-4">
+                                <label class="form-label fw-semibold">Patente</label>
+                                <input type="text" id="txtEditPatente" class="form-control" readonly>
+                            </div>
+
+                            <div class="col-md-4">
+                                <label class="form-label fw-semibold">Marca</label>
+                                <input type="text" id="txtEditMarca" class="form-control">
+                            </div>
+
+                            <div class="col-md-4">
+                                <label class="form-label fw-semibold">Modelo</label>
+                                <input type="text" id="txtEditModelo" class="form-control">
+                            </div>
+
+                            <div class="col-md-4">
+                                <label class="form-label fw-semibold">Año</label>
+                                <input type="number" id="txtEditAnio" class="form-control">
+                            </div>
+
+                            <div class="col-md-4">
+                                <label class="form-label fw-semibold">Kilometraje</label>
+                                <input type="number" id="txtEditKm" class="form-control">
+                            </div>
+
+                            <div class="col-md-4">
+                                <label class="form-label fw-semibold">Estado</label>
+                                <select id="txtEditEstado" class="form-select">
+                                    <option>Disponible</option>
+                                    <option>En uso</option>
+                                    <option>Deshabilitado</option>
+                                    <option>Fuera de servicio</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button class="btn btn-outline-brand-blue" data-bs-dismiss="modal">Cancelar</button>
+                        <button class="btn btn-brand-blue">
+                            <i class="bi bi-floppy me-1"></i> Guardar cambios
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- MODAL ENVIAR A MANTENCIÓN -->
+         <div id="mdlMantencionVehiculo" class="modal fade modal-overlay-window" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header bg-navy text-light">
+                        <h5 class="modal-title">
+                            <i class="bi bi-tools me-2"></i>Enviar a mantención
+                        </h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                    </div>
+
+                    <div class="modal-body">
+                        <div class="alert alert-light border mb-3">
+                            El vehículo seleccionado será marcado como <strong>En mantención</strong> y no podrá ser utilizado hasta ser rehabilitado.
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">Vehículo</label>
+                            <input type="text" id="txtMantencionVehiculo" class="form-control" readonly>
+                            <input type="hidden" id="hdnVehiculoMantencionId">
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">Patente</label>
+                            <input type="text" id="txtMantencionPatente" class="form-control" readonly>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">Motivo</label>
+                            <textarea id="txtMantencionMotivo" class="form-control" rows="3" placeholder="Ingrese motivo de mantención"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button class="btn btn-outline-brand-blue" data-bs-dismiss="modal">Cancelar</button>
+                        <button class="btn btn-warning text-dark">
+                            <i class="bi bi-tools me-1"></i> Confirmar mantención
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- MODAL DESHABILITAR VEHÍCULO -->
+         <div id="mdlDeshabilitarVehiculo" class="modal fade modal-overlay-window" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header bg-navy text-light">
+                        <h5 class="modal-title">
+                            <i class="bi bi-slash-circle me-2"></i>Deshabilitar vehículo
+                        </h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                    </div>
+
+                    <div class="modal-body">
+                        <div class="alert alert-danger mb-3">
+                            Esta acción dejará el vehículo <strong>no disponible</strong> para asignaciones y viajes.
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">Vehículo</label>
+                            <input type="text" id="txtDeshabilitarVehiculo" class="form-control" readonly>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">Patente</label>
+                            <input type="text" id="txtDeshabilitarPatente" class="form-control" readonly>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">Motivo</label>
+                            <textarea id="txtDeshabilitarMotivo" class="form-control" rows="3" placeholder="Ingrese motivo de deshabilitación"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button class="btn btn-outline-brand-blue" data-bs-dismiss="modal">Cancelar</button>
+                        <button class="btn btn-danger">
+                            <i class="bi bi-slash-circle me-1"></i> Deshabilitar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- MODAL REHABILITAR VEHÍCULO -->
+         <div id="mdlRehabilitarVehiculo" class="modal fade modal-overlay-window" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header bg-navy text-light">
+                        <h5 class="modal-title">
+                            <i class="bi bi-check-circle me-2"></i>Rehabilitar vehículo
+                        </h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                    </div>
+
+                    <div class="modal-body">
+                        <div class="alert alert-success mb-3">
+                            El vehículo volverá a quedar <strong>disponible</strong> para uso y asignación.
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">Vehículo</label>
+                            <input type="text" id="txtRehabilitarVehiculo" class="form-control" readonly>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">Patente</label>
+                            <input type="text" id="txtRehabilitarPatente" class="form-control" readonly>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button class="btn btn-outline-brand-blue" data-bs-dismiss="modal">Cancelar</button>
+                        <button class="btn btn-success">
+                            <i class="bi bi-check-circle me-1"></i> Rehabilitar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- MODAL CREAR/EDITAR USUARIO -->
+        <div id="mdlUsuarioForm" class="modal fade modal-overlay-window" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header bg-navy text-light">
+                        <h5 class="modal-title" id="ttlMdlUsuarioForm">
+                            <i class="bi bi-person-plus me-2"></i>Nuevo usuario
+                        </h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+
+                    <div class="modal-body bg-light">
+                        <form id="frmUsuario">
+                            <input type="hidden" id="hdnUsuarioEdicion">
+
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <label for="txtUsuario" class="form-label fw-semibold">Nombre de usuario</label>
+                                    <input type="text" id="txtUsuario" class="form-control" placeholder="Ej: clabrin">
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label for="txtNombreCompleto" class="form-label fw-semibold">Nombre completo</label>
+                                    <input type="text" id="txtNombreCompleto" class="form-control" placeholder="Ej: Cristian Labrín">
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label for="txtCorreoUsuario" class="form-label fw-semibold">Correo electrónico</label>
+                                    <input type="email" id="txtCorreoUsuario" class="form-control" placeholder="Ej: correo@empresa.cl">
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label for="slcRolUsuario" class="form-label fw-semibold">Rol</label>
+                                    <select id="slcRolUsuario" class="form-select">
+                                        <option value="" selected disabled>Seleccione un rol</option>
+                                        <option value="administrador">Administrador</option>
+                                        <option value="usuario">Usuario</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label for="slcEstadoUsuario" class="form-label fw-semibold">Estado</label>
+                                    <select id="slcEstadoUsuario" class="form-select">
+                                        <option value="activo" selected>Activo</option>
+                                        <option value="inactivo">Inactivo</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label for="txtClaveTemporal" class="form-label fw-semibold">Contraseña temporal</label>
+                                    <input type="password" id="txtClaveTemporal" class="form-control" placeholder="Solo para usuario nuevo">
+                                    <div class="form-text">En edición puedes dejar este campo vacío.</div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
+                            <i class="bi bi-x-circle"></i>
+                            Cancelar
+                        </button>
+                        <button type="button" id="btnGuardarUsuario" class="btn btn-success">
+                            <i class="bi bi-floppy me-1"></i> 
+                            Guardar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- MODAL ASIGNAR VEHÍCULO -->
+        <div id="mdlAsignarVehiculo" class="modal fade modal-overlay-window" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-md">
+                <div class="modal-content">
+                    <div class="modal-header bg-navy text-light">
+                        <h5 class="modal-title">
+                            <i class="bi bi-car-front me-2"></i>Asignar vehículo
+                        </h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+
+                    <div class="modal-body bg-light">
+                        <form id="frmAsignarVehiculo">
+                            <input type="hidden" id="hdnUsuarioAsignacion">
+
+                            <div class="mb-3">
+                                <label for="txtUsuarioAsignacion" class="form-label fw-semibold">Usuario</label>
+                                <input type="text" id="txtUsuarioAsignacion" class="form-control" readonly>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="slcVehiculoAsignado" class="form-label fw-semibold">Vehículo disponible</label>
+                                <select id="slcVehiculoAsignado" class="form-select">
+                                    <option value="" selected disabled>Seleccione un vehículo</option>
+                                    <option value="1">Toyota Yaris - ABCD-11</option>
+                                    <option value="2">Toyota RAV4 - PKTW-63</option>
+                                    <option value="3">Chevrolet Groove - LJHG-22</option>
+                                    <option value="4">Kia Sportage - ZXCV-99</option>
+                                </select>
+                            </div>
+
+                            <div class="mb-0">
+                                <label for="txtObservacionAsignacion" class="form-label fw-semibold">Observación</label>
+                                <textarea id="txtObservacionAsignacion" class="form-control" rows="3" placeholder="Opcional"></textarea>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-brand-blue" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="button" id="btnConfirmarAsignacionVehiculo" class="btn btn-brand-blue">
+                            <i class="bi bi-check2-circle me-1"></i> Asignar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- MODAL RESTABLECER CONTRASEÑA -->
+        <div id="mdlResetClave" class="modal fade modal-overlay-window" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-md">
+                <div class="modal-content">
+                    <div class="modal-header bg-navy text-light">
+                        <h5 class="modal-title">
+                            <i class="bi bi-key me-2"></i>Restablecer contraseña
+                        </h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+
+                    <div class="modal-body bg-light">
+                        <form id="frmResetClave">
+                            <input type="hidden" id="hdnUsuarioResetClave">
+
+                            <div class="mb-3">
+                                <label for="txtUsuarioResetClave" class="form-label fw-semibold">Usuario</label>
+                                <input type="text" id="txtUsuarioResetClave" class="form-control" readonly>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="txtNuevaClave" class="form-label fw-semibold">Nueva contraseña</label>
+                                <input type="password" id="txtNuevaClave" class="form-control" placeholder="Ingrese nueva contraseña">
+                            </div>
+
+                            <div class="mb-0">
+                                <label for="txtConfirmarNuevaClave" class="form-label fw-semibold">Confirmar contraseña</label>
+                                <input type="password" id="txtConfirmarNuevaClave" class="form-control" placeholder="Repita la nueva contraseña">
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-brand-blue" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="button" id="btnGuardarNuevaClave" class="btn btn-warning text-dark">
+                            <i class="bi bi-key-fill me-1"></i> Restablecer
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- MODAL DETALLE VEHÍCULO -->
+         <div id="mdlDetalleVehiculo" class="modal fade" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header bg-navy text-light">
+                        <h5 class="modal-title">
+                            <i class="bi bi-car-front me-2"></i>Detalle del vehículo
+                        </h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+
+                    <div class="modal-body bg-light">
+                        <div class="container-fluid px-0">
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <label class="form-label fw-semibold">Vehículo</label>
+                                    <input type="text" id="txtDetVehiculo" class="form-control" readonly>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label class="form-label fw-semibold">Patente</label>
+                                    <input type="text" id="txtDetPatente" class="form-control" readonly>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label class="form-label fw-semibold">Marca</label>
+                                    <input type="text" id="txtDetMarca" class="form-control" readonly>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label class="form-label fw-semibold">Modelo</label>
+                                    <input type="text" id="txtDetModelo" class="form-control" readonly>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label class="form-label fw-semibold">Color</label>
+                                    <input type="text" id="txtDetColor" class="form-control" readonly>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label class="form-label fw-semibold">Año</label>
+                                    <input type="text" id="txtDetAnio" class="form-control" readonly>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label class="form-label fw-semibold">Kilometraje actual</label>
+                                    <input type="text" id="txtDetKilometraje" class="form-control" readonly>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label class="form-label fw-semibold">Estado</label>
+                                    <input type="text" id="txtDetEstado" class="form-control" readonly>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label class="form-label fw-semibold">Última mantención</label>
+                                    <input type="text" id="txtDetUltMantencion" class="form-control" readonly>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label class="form-label fw-semibold">Próxima mantención estimada</label>
+                                    <input type="text" id="txtDetProxMantencion" class="form-control" readonly>
+                                </div>
+
+                                <div class="col-12">
+                                    <label class="form-label fw-semibold">Observaciones</label>
+                                    <textarea id="txtDetObservaciones" class="form-control" rows="3" readonly></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-brand-blue" data-bs-dismiss="modal">Cerrar</button>
+                        <button type="button" id="btnAbrirEnvioMantencionDesdeDetalle" class="btn btn-warning text-dark">
+                            <i class="bi bi-tools me-1"></i> Enviar a mantención
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
 </html>
