@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        
+        <!-- TÍTULO PÁGINA -->
+        <title>Bitácora Vehicular</title>
+
+        <!-- FAVICON -->
+        <link rel="icon" type="image/x-icon" href="./img/favicon.ico">
+
+        <!-- SCRIPTS -->
+        <script src="./node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="./node_modules/jquery/dist/jquery.min.js"></script>
+        <script src="./js/index.js"></script>
+
+        <!-- CSS -->
+        <link href="./css/estilo.css" rel="stylesheet">
+        <link href="./node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link href="./node_modules/bootstrap-icons/font/bootstrap-icons.min.css" rel="stylesheet">
+    </head>
+    <body>
+        <div class="container-fluid min-vh-100 d-flex justify-content-center align-items-center bg-login">
+            <div class="card card-auth shadow-lg border-0">
+                <div class="card-body p-4 p-md-5">
+                    <div class="text-center mb-4">
+                        <h1 class="titulo-auth mb-2">
+                            <i class="bi bi-car-front-fill me-2"></i>Bitácora Vehicular
+                        </h1>
+                        <p class="text-muted mb-0">Crea tu cuenta para comenzar</p>
+                    </div>
+
+                    <form id="frmRegistro">
+                        <div class="mb-3">
+                            <label for="txtNombreCompletoRegistro" class="form-label fw-semibold">Nombre completo</label>
+                            <input type="text" id="txtNombreCompletoRegistro" class="form-control input-auth" placeholder="Ingrese su nombre completo">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="txtCorreoRegistro" class="form-label fw-semibold">Correo</label>
+                            <input type="email" id="txtCorreoRegistro" class="form-control input-auth" placeholder="Ingrese su correo">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="txtUsuarioRegistro" class="form-label fw-semibold">Nombre de usuario</label>
+                            <input type="text" id="txtUsuarioRegistro" class="form-control input-auth" placeholder="Ingrese un nombre de usuario">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="txtPasswordRegistro" class="form-label fw-semibold">Contraseña</label>
+                            <input type="password" id="txtPasswordRegistro" class="form-control input-auth" placeholder="Ingrese su contraseña">
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="txtConfirmarPasswordRegistro" class="form-label fw-semibold">Confirmar contraseña</label>
+                            <input type="password" id="txtConfirmarPasswordRegistro" class="form-control input-auth" placeholder="Repita su contraseña">
+                        </div>
+
+                        <div class="d-grid mb-3">
+                            <button type="button" id="btnRegistrarse" class="btn btn-brand-blue">
+                                Registrarse
+                            </button>
+                        </div>
+
+                        <div class="text-center">
+                            <a href="login.html" id="lnkVolverLogin" class="link-auth">
+                                ¿Ya tienes cuenta? Inicia sesión
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>        
+    </body>
+</html>

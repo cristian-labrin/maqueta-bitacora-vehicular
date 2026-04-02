@@ -1,9 +1,9 @@
 $(function(){
     $("#btnInicioSesion").on("click",function(){
-        login();
+        directUrl('index.html');
     });
 });
 
-function login() {
-    window.location.href = "index.html";
+function directUrl(url) {
+    window.location.href = url;
 }

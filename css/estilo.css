@@ -560,3 +560,35 @@ textarea.form-control {
     content: "Sin vehículos asignados";
     color: #6c757d;
 }
+
+.card-mantenedor {
+    border-radius: 14px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card-mantenedor:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08) !important;
+}
+
+.icono-mantenedor {
+    width: 58px;
+    height: 58px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+}
+
+.btn-brand-blue {
+    background-color: #3b82f6;
+    border-color: #3b82f6;
+    color: #fff;
+}
+
+.btn-brand-blue:hover {
+    background-color: #2563eb;
+    border-color: #2563eb;
+    color: #fff;
+}

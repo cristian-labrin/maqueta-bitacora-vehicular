@@ -70,6 +70,22 @@ $(function () {
         abrirModal('mdlFueraServicio');
     });
 
+    $('#btnModalRoles').on('click', function () {
+        abrirModal('mdlMantRoles');
+    });
+
+    $('#btnModalEstados').on('click', function () {
+        abrirModal('mdlMantEstados');
+    });
+
+    $('#btnModalManteciones').on('click', function () {
+        abrirModal('mdlMantTiposMantencion');
+    });
+
+    $('#btnModalMarcasModelos').on('click', function () {
+        abrirModal('mdlMantMarcasModelos');
+    });
+
     /* MODALES SECUNDARIOS */
     $('#btnNuevoVehiculo').on('click', function () {
         limpiarModalNuevoVehiculo();
@@ -194,9 +210,6 @@ $(function () {
         console.log('Cambiar estado:', { usuario, nuevoEstado });
     });
 
-
-
-
     $(document).on('change', '#slcUsuarioAsignacion', function () {
         const usuarioId = $(this).val();
         cargarVehiculosAsignados(usuarioId);
@@ -234,6 +247,85 @@ $(function () {
         $('#txtMantencionPatente').val(vehiculoDetalleActual.patente);
 
         abrirModalSecundario('mdlMantencionVehiculo');
+    });
+
+        // =========================
+    // ROLES
+    // =========================
+    $('#btnNuevoRol').on('click', function () {
+        abrirModalNuevoRol();
+    });
+
+    $(document).on('click', '.btn-editar-rol', function () {
+        const id = $(this).data('id');
+        abrirModalEditarRol(id);
+    });
+
+    $('#btnGuardarRol').on('click', function () {
+        guardarRol();
+    });
+
+    // =========================
+    // ESTADOS
+    // =========================
+    $('#btnNuevoEstado').on('click', function () {
+        abrirModalNuevoEstado();
+    });
+
+    $(document).on('click', '.btn-editar-estado', function () {
+        const id = $(this).data('id');
+        abrirModalEditarEstado(id);
+    });
+
+    $('#btnGuardarEstado').on('click', function () {
+        guardarEstado();
+    });
+
+    // =========================
+    // TIPOS DE MANTENCIÓN
+    // =========================
+    $('#btnNuevoTipoMantencion').on('click', function () {
+        abrirModalNuevoTipoMantencion();
+    });
+
+    $(document).on('click', '.btn-editar-tipo-mantencion', function () {
+        const id = $(this).data('id');
+        abrirModalEditarTipoMantencion(id);
+    });
+
+    $('#btnGuardarTipoMantencion').on('click', function () {
+        guardarTipoMantencion();
+    });
+
+    // =========================
+    // MARCAS / MODELOS
+    // =========================
+    $('#btnNuevoMarcaModelo').on('click', function () {
+        abrirModalNuevoMarcaModelo();
+    });
+
+    $(document).on('click', '.btn-editar-marca-modelo', function () {
+        const id = $(this).data('id');
+        abrirModalEditarMarcaModelo(id);
+    });
+
+    $('#btnGuardarMarcaModelo').on('click', function () {
+        guardarMarcaModelo();
+    });
+
+    $(document).on('click', '.btn-cerrar-viaje', function () {
+        abrirModalCerrarViaje(this);
+    });
+
+    $('#slcCargoBencina').on('change', function () {
+        const cargoBencina = $(this).val() === 'si';
+        $('#bloqueCargaBencina').toggleClass('d-none', !cargoBencina);
+
+        if (!cargoBencina) {
+            $('#txtMontoBencina').val('');
+            $('#flBoletaBencina').val('');
+            $('#txtObservacionBencina').val('');
+        }
     });
 });
 
@@ -654,4 +746,254 @@ function obtenerDetalleVehiculo(vehiculoId) {
     };
 
     return data[vehiculoId] || null;
+}
+
+function abrirModalMantenedores(idModal) {
+    const modal = new bootstrap.Modal(document.getElementById(idModal), {
+        backdrop: true,
+        focus: true
+    });
+    modal.show();
+
+    setTimeout(() => {
+        $('.modal-backdrop').last().addClass('backdrop-secundario');
+    }, 100);
+}
+
+//
+// ROLES
+//
+function abrirModalNuevoRol() {
+    $('#frmRol')[0].reset();
+    $('#hdnRolId').val('');
+    $('#ttlMdlRolForm').html('<i class="bi bi-plus-circle me-2"></i>Nuevo rol');
+    abrirModalMantenedores('mdlRolForm');
+}
+
+function abrirModalEditarRol(id) {
+    $('#frmRol')[0].reset();
+    $('#hdnRolId').val(id);
+    $('#ttlMdlRolForm').html('<i class="bi bi-pencil-square me-2"></i>Editar rol');
+
+    const rolesMock = {
+        1: { nombre: 'Administrador', descripcion: 'Acceso total al sistema', estado: 'activo' },
+        2: { nombre: 'Usuario', descripcion: 'Uso operativo del sistema', estado: 'activo' },
+        3: { nombre: 'Supervisor', descripcion: 'Supervisión y control', estado: 'inactivo' }
+    };
+
+    const rol = rolesMock[id];
+    if (!rol) return;
+
+    $('#txtNombreRol').val(rol.nombre);
+    $('#txtDescripcionRol').val(rol.descripcion);
+    $('#slcEstadoRol').val(rol.estado);
+
+    abrirModalMantenedores('mdlRolForm');
+}
+
+function guardarRol() {
+    const id = $('#hdnRolId').val();
+    const nombre = $('#txtNombreRol').val().trim();
+    const descripcion = $('#txtDescripcionRol').val().trim();
+    const estado = $('#slcEstadoRol').val();
+
+    if (!nombre) {
+        alert('Debes ingresar el nombre del rol.');
+        return;
+    }
+
+    console.log('Guardar rol', { id, nombre, descripcion, estado });
+    bootstrap.Modal.getInstance(document.getElementById('mdlRolForm')).hide();
+}
+
+//
+// ESTADOS
+//
+function abrirModalNuevoEstado() {
+    $('#frmEstado')[0].reset();
+    $('#hdnEstadoId').val('');
+    $('#ttlMdlEstadoForm').html('<i class="bi bi-plus-circle me-2"></i>Nuevo estado');
+    abrirModalMantenedores('mdlEstadoForm');
+}
+
+function abrirModalEditarEstado(id) {
+    $('#frmEstado')[0].reset();
+    $('#hdnEstadoId').val(id);
+    $('#ttlMdlEstadoForm').html('<i class="bi bi-pencil-square me-2"></i>Editar estado');
+
+    const estadosMock = {
+        1: {
+            nombre: 'Activo',
+            contexto: 'usuario',
+            descripcion: 'Usuario habilitado para operar',
+            estadoRegistro: 'activo'
+        },
+        2: {
+            nombre: 'En mantención',
+            contexto: 'vehiculo',
+            descripcion: 'Vehículo no disponible por mantención',
+            estadoRegistro: 'activo'
+        },
+        3: {
+            nombre: 'Disponible',
+            contexto: 'asignacion',
+            descripcion: 'Disponible para ser utilizado',
+            estadoRegistro: 'inactivo'
+        }
+    };
+
+    const estado = estadosMock[id];
+    if (!estado) return;
+
+    $('#txtNombreEstado').val(estado.nombre);
+    $('#slcContextoEstado').val(estado.contexto);
+    $('#txtDescripcionEstado').val(estado.descripcion);
+    $('#slcEstadoRegistro').val(estado.estadoRegistro);
+
+    abrirModalMantenedores('mdlEstadoForm');
+}
+
+function guardarEstado() {
+    const id = $('#hdnEstadoId').val();
+    const nombre = $('#txtNombreEstado').val().trim();
+    const contexto = $('#slcContextoEstado').val();
+    const descripcion = $('#txtDescripcionEstado').val().trim();
+    const estadoRegistro = $('#slcEstadoRegistro').val();
+
+    if (!nombre || !contexto) {
+        alert('Debes completar los campos obligatorios del estado.');
+        return;
+    }
+
+    console.log('Guardar estado', { id, nombre, contexto, descripcion, estadoRegistro });
+    bootstrap.Modal.getInstance(document.getElementById('mdlEstadoForm')).hide();
+}
+
+//
+// TIPOS DE MANTENCIÓN
+//
+function abrirModalNuevoTipoMantencion() {
+    $('#frmTipoMantencion')[0].reset();
+    $('#hdnTipoMantencionId').val('');
+    $('#ttlMdlTipoMantencionForm').html('<i class="bi bi-plus-circle me-2"></i>Nuevo tipo de mantención');
+    abrirModalMantenedores('mdlTipoMantencionForm');
+}
+
+function abrirModalEditarTipoMantencion(id) {
+    $('#frmTipoMantencion')[0].reset();
+    $('#hdnTipoMantencionId').val(id);
+    $('#ttlMdlTipoMantencionForm').html('<i class="bi bi-pencil-square me-2"></i>Editar tipo de mantención');
+
+    const tiposMock = {
+        1: {
+            nombre: 'Preventiva',
+            descripcion: 'Mantención programada por kilometraje o tiempo',
+            estado: 'activo'
+        },
+        2: {
+            nombre: 'Correctiva',
+            descripcion: 'Mantención por falla o reparación',
+            estado: 'activo'
+        },
+        3: {
+            nombre: 'Cambio de aceite',
+            descripcion: 'Servicio específico de lubricación',
+            estado: 'inactivo'
+        }
+    };
+
+    const tipo = tiposMock[id];
+    if (!tipo) return;
+
+    $('#txtNombreTipoMantencion').val(tipo.nombre);
+    $('#txtDescripcionTipoMantencion').val(tipo.descripcion);
+    $('#slcEstadoTipoMantencion').val(tipo.estado);
+
+    abrirModalMantenedores('mdlTipoMantencionForm');
+}
+
+function guardarTipoMantencion() {
+    const id = $('#hdnTipoMantencionId').val();
+    const nombre = $('#txtNombreTipoMantencion').val().trim();
+    const descripcion = $('#txtDescripcionTipoMantencion').val().trim();
+    const estado = $('#slcEstadoTipoMantencion').val();
+
+    if (!nombre) {
+        alert('Debes ingresar el nombre del tipo de mantención.');
+        return;
+    }
+
+    console.log('Guardar tipo mantención', { id, nombre, descripcion, estado });
+    bootstrap.Modal.getInstance(document.getElementById('mdlTipoMantencionForm')).hide();
+}
+
+//
+// MARCAS / MODELOS
+//
+function abrirModalNuevoMarcaModelo() {
+    $('#frmMarcaModelo')[0].reset();
+    $('#hdnMarcaModeloId').val('');
+    $('#ttlMdlMarcaModeloForm').html('<i class="bi bi-plus-circle me-2"></i>Nueva marca / modelo');
+    abrirModalMantenedores('mdlMarcaModeloForm');
+}
+
+function abrirModalEditarMarcaModelo(id) {
+    $('#frmMarcaModelo')[0].reset();
+    $('#hdnMarcaModeloId').val(id);
+    $('#ttlMdlMarcaModeloForm').html('<i class="bi bi-pencil-square me-2"></i>Editar marca / modelo');
+
+    const marcasModelosMock = {
+        1: { marca: 'Toyota', modelo: 'Yaris', estado: 'activo' },
+        2: { marca: 'Toyota', modelo: 'RAV4', estado: 'activo' },
+        3: { marca: 'Chevrolet', modelo: 'Groove', estado: 'inactivo' }
+    };
+
+    const item = marcasModelosMock[id];
+    if (!item) return;
+
+    $('#txtMarcaVehiculo').val(item.marca);
+    $('#txtModeloVehiculo').val(item.modelo);
+    $('#slcEstadoMarcaModelo').val(item.estado);
+
+    abrirModalMantenedores('mdlMarcaModeloForm');
+}
+
+function guardarMarcaModelo() {
+    const id = $('#hdnMarcaModeloId').val();
+    const marca = $('#txtMarcaVehiculo').val().trim();
+    const modelo = $('#txtModeloVehiculo').val().trim();
+    const estado = $('#slcEstadoMarcaModelo').val();
+
+    if (!marca || !modelo) {
+        alert('Debes ingresar la marca y el modelo.');
+        return;
+    }
+
+    console.log('Guardar marca/modelo', { id, marca, modelo, estado });
+    bootstrap.Modal.getInstance(document.getElementById('mdlMarcaModeloForm')).hide();
+}
+
+function abrirModalCerrarViaje(btn) {
+    const viajeId = $(btn).data('viaje-id');
+    const vehiculoId = $(btn).data('vehiculo-id');
+    const patente = $(btn).data('patente');
+    const vehiculo = $(btn).data('vehiculo');
+    const marca = $(btn).data('marca');
+    const modelo = $(btn).data('modelo');
+    const kmSalida = $(btn).data('kmsalida');
+    const fechaInicio = $(btn).data('fechainicio');
+
+    $('#hdnCerrarViajeId').val(viajeId);
+    $('#hdnCerrarVehiculoId').val(vehiculoId);
+    $('#txtCerrarVehiculo').val(vehiculo);
+    $('#txtCerrarPatente').val(patente);
+    $('#txtCerrarMarcaModelo').val(`${marca} / ${modelo}`);
+    $('#txtCerrarFechaInicio').val(fechaInicio);
+    $('#txtCerrarKmSalida').val(kmSalida);
+    $('#txtCerrarKmEntrega').val('');
+    $('#txtObservacionCierreViaje').val('');
+    $('#slcCargoBencina').val('no').trigger('change');
+
+    const modal = new bootstrap.Modal(document.getElementById('mdlCerrarViaje'));
+    modal.show();
 }

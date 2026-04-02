@@ -67,7 +67,7 @@
                             <strong class="ms-2 mb-0">clabrin</strong>
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#"><i class="bi bi-x-circle me-2 text-danger"></i> Cerrar Sesión</a></li>
+                            <li><a class="dropdown-item" href="login.html"><i class="bi bi-x-circle me-2 text-danger"></i> Cerrar Sesión</a></li>
                         </ul>
                     </div> 
                 </div>
@@ -149,7 +149,7 @@
                                                 <td class="text-center">25.000</td>
                                                 <td class="text-center"><span class="badge rounded-pill text-bg-success">Disponible</span></td>
                                                 <td class="text-center">
-                                                    <button id="btnModalViaje" class="btn btn-outline-brand-blue btn-sm inicia-viaje">
+                                                    <button id="btnModalViaje" class="btn btn-outline-brand-blue btn-sm inicia-viaje" disabled>
                                                         <i class="bi bi-play-circle me-1"></i>
                                                         Iniciar viaje
                                                     </button>
@@ -164,11 +164,19 @@
                                                 <td class="text-center">69.500</td>
                                                 <td class="text-center"><span class="badge rounded-pill text-bg-danger">En uso</span></td>
                                                 <td class="text-center">
-                                                    <button id="" class="btn btn-outline-brand-blue btn-sm inicia-viaje" disabled>
-                                                        <i class="bi bi-play-circle me-1"></i>
-                                                        Iniciar viaje
+                                                    <button
+                                                        class="btn btn-outline-danger btn-sm btn-cerrar-viaje"
+                                                        data-viaje-id="1"
+                                                        data-vehiculo-id="2"
+                                                        data-patente="PKTW-63"
+                                                        data-vehiculo="Toyota RAV4"
+                                                        data-marca="Toyota"
+                                                        data-modelo="RAV4"
+                                                        data-kmsalida="69500"
+                                                        data-fechainicio="2026-04-02 08:15">
+                                                        <i class="bi bi-stop-circle"></i> Cerrar viaje
                                                     </button>
-                                                </td>
+                                                </td>                                                
                                             </tr>
                                             </tbody>
                                         </table>
@@ -635,9 +643,118 @@
                     </div>
 
                     <!-- MANTENEDORES -->
-                     <div class="tab-pane fade" id="v-pills-mantenedores" role="tabpanel" aria-labelledby="v-pills-mantenedores-tab" tabindex="0">
-                        <h3 class="text-dark">MANTENEDORES</h3>
-                     </div>
+                    <div class="tab-pane fade" id="v-pills-mantenedores" role="tabpanel" aria-labelledby="v-pills-mantenedores-tab" tabindex="0">
+                        <div class="container-fluid px-0">
+                            <div class="card shadow-sm border-0 card-mantenedores-principal">
+                                <div class="card-header card-header-navy d-flex justify-content-between align-items-center flex-wrap gap-2">
+                                    <div>
+                                        <h4 class="mb-0 text-white">
+                                            <i class="bi bi-sliders me-2"></i>
+                                            Mantenedores
+                                        </h4>
+                                    </div>
+                                </div>
+
+                                <div class="card-body bg-light">
+                                    <div class="row g-4">
+                                        <!-- Roles -->
+                                        <div class="col-md-6 col-xl-3 d-flex">
+                                            <div class="card shadow-sm border-0 w-100 card-mantenedor">
+                                                <div class="card-body d-flex flex-column">
+                                                    <div class="mb-3">
+                                                        <div class="icono-mantenedor bg-primary-subtle text-primary">
+                                                            <i class="bi bi-person-badge"></i>
+                                                        </div>
+                                                    </div>
+
+                                                    <h5 class="fw-bold mb-2">Roles</h5>
+                                                    <p class="text-muted flex-grow-1 mb-3">
+                                                        Administra los perfiles del sistema, como Administrador, Usuario u otros roles futuros.
+                                                    </p>
+
+                                                    <button id="btnModalRoles" class="btn btn-brand-blue w-100">
+                                                        <i class="bi bi-gear me-1"></i> 
+                                                        Gestionar
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Estados -->
+                                        <div class="col-md-6 col-xl-3 d-flex">
+                                            <div class="card shadow-sm border-0 w-100 card-mantenedor">
+                                                <div class="card-body d-flex flex-column">
+                                                    <div class="mb-3">
+                                                        <div class="icono-mantenedor bg-success-subtle text-success">
+                                                            <i class="bi bi-toggle-on"></i>
+                                                        </div>
+                                                    </div>
+
+                                                    <h5 class="fw-bold mb-2">Estados</h5>
+                                                    <p class="text-muted flex-grow-1 mb-3">
+                                                        Define estados parametrizables para usuario, vehículo, mantención o asignación.
+                                                    </p>
+
+                                                    <button id="btnModalEstados" class="btn btn-brand-blue w-100">
+                                                        <i class="bi bi-gear me-1"></i> 
+                                                        Gestionar
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Tipos de mantención -->
+                                        <div class="col-md-6 col-xl-3 d-flex">
+                                            <div class="card shadow-sm border-0 w-100 card-mantenedor">
+                                                <div class="card-body d-flex flex-column">
+                                                    <div class="mb-3">
+                                                        <div class="icono-mantenedor bg-warning-subtle text-warning">
+                                                            <i class="bi bi-tools"></i>
+                                                        </div>
+                                                    </div>
+
+                                                    <h5 class="fw-bold mb-2">Tipos de mantención</h5>
+                                                    <p class="text-muted flex-grow-1 mb-3">
+                                                        Mantén el catálogo de mantenciones preventivas, correctivas y otras variantes.
+                                                    </p>
+
+                                                    <button id="btnModalManteciones" class="btn btn-brand-blue w-100">
+                                                        <i class="bi bi-gear me-1"></i> 
+                                                        Gestionar
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Marcas / Modelos -->
+                                        <div class="col-md-6 col-xl-3 d-flex">
+                                            <div class="card shadow-sm border-0 w-100 card-mantenedor">
+                                                <div class="card-body d-flex flex-column">
+                                                    <div class="mb-3">
+                                                        <div class="icono-mantenedor bg-info-subtle text-info">
+                                                            <i class="bi bi-car-front"></i>
+                                                        </div>
+                                                    </div>
+
+                                                    <h5 class="fw-bold mb-2">Marcas / Modelos</h5>
+                                                    <p class="text-muted flex-grow-1 mb-3">
+                                                        Gestiona marcas y modelos para evitar registros manuales inconsistentes.
+                                                    </p>
+
+                                                    <button id="btnModalMarcasModelos" class="btn btn-brand-blue w-100">
+                                                        <i class="bi bi-gear me-1"></i> 
+                                                        Gestionar
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="card-footer bg-light border-0"></div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1951,5 +2068,805 @@
                 </div>
             </div>
         </div>
+
+        <!-- MODAL MANTENEDOR DE ROLES -->
+        <div id="mdlMantRoles" class="modal fade" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-xl modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header bg-navy text-light">
+                        <h5 class="modal-title">
+                            <i class="bi bi-person-badge me-2"></i>Mantenedor de roles
+                        </h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+
+                    <div class="modal-body bg-light">
+                        <div class="container-fluid px-0">
+
+                            <div class="card shadow-sm border-0 mb-4">
+                                <div class="card-header card-header-navy">
+                                    Filtros de búsqueda
+                                </div>
+                                <div class="card-body">
+                                    <div class="row g-3">
+                                        <div class="col-md-4">
+                                            <label for="txtFiltroRol" class="form-label fw-semibold">Nombre rol</label>
+                                            <input type="text" id="txtFiltroRol" class="form-control" placeholder="Buscar rol">
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <label for="slcFiltroEstadoRol" class="form-label fw-semibold">Estado</label>
+                                            <select id="slcFiltroEstadoRol" class="form-select">
+                                                <option value="todos" selected>Todos</option>
+                                                <option value="activo">Activo</option>
+                                                <option value="inactivo">Inactivo</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="col-md-4 d-flex align-items-end">
+                                            <button id="btnBuscarRol" class="btn btn-dark me-2">
+                                                <i class="bi bi-search me-1"></i> 
+                                                Buscar
+                                            </button>
+                                            <button id="btnLimpiarRol" class="btn btn-dark">
+                                                <i class="bi bi-trash"></i>
+                                                Limpiar
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
+                                <h4 class="text-dark mb-0">Listado de roles</h4>
+                                <button id="btnNuevoRol" class="btn btn-success">
+                                    <i class="bi bi-plus-circle me-1"></i> 
+                                    Nuevo rol
+                                </button>
+                            </div>
+
+                            <div class="card shadow-sm border-0">
+                                <div class="card-body p-0">
+                                    <table class="table table-hover mb-0 align-middle">
+                                        <thead>
+                                            <tr class="table-navy">
+                                                <th class="text-center">Rol</th>
+                                                <th class="text-center">Descripción</th>
+                                                <th class="text-center">Estado</th>
+                                                <th class="text-center">Acciones</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td class="text-center">Administrador</td>
+                                                <td class="text-center">Acceso total al sistema</td>
+                                                <td class="text-center"><span class="badge rounded-pill text-bg-success">Activo</span></td>
+                                                <td class="text-center">
+                                                    <button class="btn btn-outline-brand-blue btn-sm me-1 btn-editar-rol" data-id="1" title="Editar">
+                                                        <i class="bi bi-pencil"></i>
+                                                    </button>
+                                                    <button class="btn btn-outline-danger btn-sm btn-toggle-rol" data-id="1" data-estado="activo" title="Desactivar">
+                                                        <i class="bi bi-person-slash"></i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-center">Usuario</td>
+                                                <td class="text-center">Uso operativo del sistema</td>
+                                                <td class="text-center"><span class="badge rounded-pill text-bg-success">Activo</span></td>
+                                                <td class="text-center">
+                                                    <button class="btn btn-outline-brand-blue btn-sm me-1 btn-editar-rol" data-id="2" title="Editar">
+                                                        <i class="bi bi-pencil"></i>
+                                                    </button>
+                                                    <button class="btn btn-outline-danger btn-sm btn-toggle-rol" data-id="2" data-estado="activo" title="Desactivar">
+                                                        <i class="bi bi-person-slash"></i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-center">Supervisor</td>
+                                                <td class="text-center">Supervisión y control</td>
+                                                <td class="text-center"><span class="badge rounded-pill text-bg-secondary">Inactivo</span></td>
+                                                <td class="text-center">
+                                                    <button class="btn btn-outline-brand-blue btn-sm me-1 btn-editar-rol" data-id="3" title="Editar">
+                                                        <i class="bi bi-pencil"></i>
+                                                    </button>
+                                                    <button class="btn btn-outline-success btn-sm btn-toggle-rol" data-id="3" data-estado="inactivo" title="Activar">
+                                                        <i class="bi bi-person-check"></i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
+                            <i class="bi bi-x-circle"></i>
+                            Cerrar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- MODAL MANTENEDOR DE ESTADOS -->
+        <div id="mdlMantEstados" class="modal fade" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-xl modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header bg-navy text-light">
+                        <h5 class="modal-title">
+                            <i class="bi bi-toggle-on me-2"></i>Mantenedor de estados
+                        </h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+
+                    <div class="modal-body bg-light">
+                        <div class="container-fluid px-0">
+
+                            <div class="card shadow-sm border-0 mb-4">
+                                <div class="card-header card-header-navy">
+                                    Filtros de búsqueda
+                                </div>
+                                <div class="card-body">
+                                    <div class="row g-3">
+                                        <div class="col-md-4">
+                                            <label for="txtFiltroEstadoNombre" class="form-label fw-semibold">Nombre estado</label>
+                                            <input type="text" id="txtFiltroEstadoNombre" class="form-control" placeholder="Buscar estado">
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <label for="slcFiltroEstadoContexto" class="form-label fw-semibold">Contexto</label>
+                                            <select id="slcFiltroEstadoContexto" class="form-select">
+                                                <option value="todos" selected>Todos</option>
+                                                <option value="usuario">Usuario</option>
+                                                <option value="vehiculo">Vehículo</option>
+                                                <option value="mantencion">Mantención</option>
+                                                <option value="asignacion">Asignación</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="col-md-4 d-flex align-items-end">
+                                            <button id="btnBuscarEstado" class="btn btn-dark me-2">
+                                                <i class="bi bi-search me-1"></i>
+                                                Buscar
+                                            </button>
+                                            <button id="btnLimpiarEstado" class="btn btn-dark">
+                                                <i class="bi bi-trash"></i>
+                                                Limpiar
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
+                                <h4 class="text-dark mb-0">Listado de estados</h4>
+                                <button id="btnNuevoEstado" class="btn btn-success">
+                                    <i class="bi bi-plus-circle me-1"></i> 
+                                    Nuevo estado
+                                </button>
+                            </div>
+
+                            <div class="card shadow-sm border-0">
+                                <div class="card-body p-0">
+                                    <table class="table table-hover mb-0 align-middle">
+                                        <thead>
+                                            <tr class="table-navy">
+                                                <th class="text-center">Estado</th>
+                                                <th class="text-center">Contexto</th>
+                                                <th class="text-center">Descripción</th>
+                                                <th class="text-center">Estado registro</th>
+                                                <th class="text-center">Acciones</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td class="text-center">Activo</td>
+                                                <td class="text-center">Usuario</td>
+                                                <td class="text-center">Usuario habilitado para operar</td>
+                                                <td class="text-center"><span class="badge rounded-pill text-bg-success">Activo</span></td>
+                                                <td class="text-center">
+                                                    <button class="btn btn-outline-brand-blue btn-sm me-1 btn-editar-estado" data-id="1">
+                                                        <i class="bi bi-pencil"></i>
+                                                    </button>
+                                                    <button class="btn btn-outline-danger btn-sm btn-toggle-estado-registro" data-id="1" data-estado="activo">
+                                                        <i class="bi bi-person-slash"></i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-center">En mantención</td>
+                                                <td class="text-center">Vehículo</td>
+                                                <td class="text-center">Vehículo no disponible por mantención</td>
+                                                <td class="text-center"><span class="badge rounded-pill text-bg-success">Activo</span></td>
+                                                <td class="text-center">
+                                                    <button class="btn btn-outline-brand-blue btn-sm me-1 btn-editar-estado" data-id="2">
+                                                        <i class="bi bi-pencil"></i>
+                                                    </button>
+                                                    <button class="btn btn-outline-danger btn-sm btn-toggle-estado-registro" data-id="2" data-estado="activo">
+                                                        <i class="bi bi-person-slash"></i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-center">Disponible</td>
+                                                <td class="text-center">Asignación</td>
+                                                <td class="text-center">Disponible para ser utilizado</td>
+                                                <td class="text-center"><span class="badge rounded-pill text-bg-secondary">Inactivo</span></td>
+                                                <td class="text-center">
+                                                    <button class="btn btn-outline-brand-blue btn-sm me-1 btn-editar-estado" data-id="3">
+                                                        <i class="bi bi-pencil"></i>
+                                                    </button>
+                                                    <button class="btn btn-outline-success btn-sm btn-toggle-estado-registro" data-id="3" data-estado="inactivo">
+                                                        <i class="bi bi-person-check"></i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
+                            <i class="bi bi-x-circle"></i>
+                            Cerrar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- MODAL MANTENEDOR DE TIPOS DE MANTENCIONES -->
+        <div id="mdlMantTiposMantencion" class="modal fade" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-xl modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header bg-navy text-light">
+                        <h5 class="modal-title">
+                            <i class="bi bi-tools me-2"></i>Mantenedor de tipos de mantención
+                        </h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+
+                    <div class="modal-body bg-light">
+                        <div class="container-fluid px-0">
+
+                            <div class="card shadow-sm border-0 mb-4">
+                                <div class="card-header card-header-navy">
+                                    Filtros de búsqueda
+                                </div>
+                                <div class="card-body">
+                                    <div class="row g-3">
+                                        <div class="col-md-6">
+                                            <label for="txtFiltroTipoMantencion" class="form-label fw-semibold">Tipo de mantención</label>
+                                            <input type="text" id="txtFiltroTipoMantencion" class="form-control" placeholder="Buscar tipo de mantención">
+                                        </div>
+
+                                        <div class="col-md-6 d-flex align-items-end">
+                                            <button id="btnBuscarTipoMantencion" class="btn btn-dark me-2">
+                                                <i class="bi bi-search me-1"></i> 
+                                                Buscar
+                                            </button>
+                                            <button id="btnLimpiarTipoMantencion" class="btn btn-dark">
+                                                <i class="bi bi-trash"></i> 
+                                                Limpiar
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
+                                <h4 class="text-dark mb-0">Listado de tipos de mantención</h4>
+                                <button id="btnNuevoTipoMantencion" class="btn btn-success">
+                                    <i class="bi bi-plus-circle me-1"></i> 
+                                    Nuevo tipo
+                                </button>
+                            </div>
+
+                            <div class="card shadow-sm border-0">
+                                <div class="card-body p-0">
+                                    <table class="table table-hover mb-0 align-middle">
+                                        <thead>
+                                            <tr class="table-navy">
+                                                <th class="text-center">Tipo</th>
+                                                <th class="text-center">Descripción</th>
+                                                <th class="text-center">Estado</th>
+                                                <th class="text-center">Acciones</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td class="text-center">Preventiva</td>
+                                                <td class="text-center">Mantención programada por kilometraje o tiempo</td>
+                                                <td class="text-center"><span class="badge rounded-pill text-bg-success">Activo</span></td>
+                                                <td class="text-center">
+                                                    <button class="btn btn-outline-brand-blue btn-sm me-1 btn-editar-tipo-mantencion" data-id="1">
+                                                        <i class="bi bi-pencil"></i>
+                                                    </button>
+                                                    <button class="btn btn-outline-danger btn-sm btn-toggle-tipo-mantencion" data-id="1" data-estado="activo">
+                                                        <i class="bi bi-person-slash"></i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-center">Correctiva</td>
+                                                <td class="text-center">Mantención por falla o reparación</td>
+                                                <td class="text-center"><span class="badge rounded-pill text-bg-success">Activo</span></td>
+                                                <td class="text-center">
+                                                    <button class="btn btn-outline-brand-blue btn-sm me-1 btn-editar-tipo-mantencion" data-id="2">
+                                                        <i class="bi bi-pencil"></i>
+                                                    </button>
+                                                    <button class="btn btn-outline-danger btn-sm btn-toggle-tipo-mantencion" data-id="2" data-estado="activo">
+                                                        <i class="bi bi-person-slash"></i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-center">Cambio de aceite</td>
+                                                <td class="text-center">Servicio específico de lubricación</td>
+                                                <td class="text-center"><span class="badge rounded-pill text-bg-secondary">Inactivo</span></td>
+                                                <td class="text-center">
+                                                    <button class="btn btn-outline-brand-blue btn-sm me-1 btn-editar-tipo-mantencion" data-id="3">
+                                                        <i class="bi bi-pencil"></i>
+                                                    </button>
+                                                    <button class="btn btn-outline-success btn-sm btn-toggle-tipo-mantencion" data-id="3" data-estado="inactivo">
+                                                        <i class="bi bi-person-check"></i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
+                            <i class="bi bi-x-circle"></i>
+                            Cerrar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- MODAL MANTENEDOR DE MARCAS Y MODELOS -->
+        <div id="mdlMantMarcasModelos" class="modal fade" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-xl modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header bg-navy text-light">
+                        <h5 class="modal-title">
+                            <i class="bi bi-car-front me-2"></i>Mantenedor de marcas / modelos
+                        </h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+
+                    <div class="modal-body bg-light">
+                        <div class="container-fluid px-0">
+
+                            <div class="card shadow-sm border-0 mb-4">
+                                <div class="card-header card-header-navy">
+                                    Filtros de búsqueda
+                                </div>
+                                <div class="card-body">
+                                    <div class="row g-3">
+                                        <div class="col-md-4">
+                                            <label for="txtFiltroMarca" class="form-label fw-semibold">Marca</label>
+                                            <input type="text" id="txtFiltroMarca" class="form-control" placeholder="Buscar marca">
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <label for="txtFiltroModelo" class="form-label fw-semibold">Modelo</label>
+                                            <input type="text" id="txtFiltroModelo" class="form-control" placeholder="Buscar modelo">
+                                        </div>
+
+                                        <div class="col-md-4 d-flex align-items-end">
+                                            <button id="btnBuscarMarcaModelo" class="btn btn-dark me-2">
+                                                <i class="bi bi-search me-1"></i> 
+                                                Buscar
+                                            </button>
+                                            <button id="btnLimpiarMarcaModelo" class="btn btn-dark">
+                                                <i class="bi bi-trash"></i>
+                                                Limpiar
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
+                                <h4 class="text-dark mb-0">Listado de marcas / modelos</h4>
+                                <button id="btnNuevoMarcaModelo" class="btn btn-success">
+                                    <i class="bi bi-plus-circle me-1"></i> 
+                                    Nueva marca / modelo
+                                </button>
+                            </div>
+
+                            <div class="card shadow-sm border-0">
+                                <div class="card-body p-0">
+                                    <table class="table table-hover mb-0 align-middle">
+                                        <thead>
+                                            <tr class="table-navy">
+                                                <th class="text-center">Marca</th>
+                                                <th class="text-center">Modelo</th>
+                                                <th class="text-center">Estado</th>
+                                                <th class="text-center">Acciones</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td class="text-center">Toyota</td>
+                                                <td class="text-center">Yaris</td>
+                                                <td class="text-center"><span class="badge rounded-pill text-bg-success">Activo</span></td>
+                                                <td class="text-center">
+                                                    <button class="btn btn-outline-brand-blue btn-sm me-1 btn-editar-marca-modelo" data-id="1">
+                                                        <i class="bi bi-pencil"></i>
+                                                    </button>
+                                                    <button class="btn btn-outline-danger btn-sm btn-toggle-marca-modelo" data-id="1" data-estado="activo">
+                                                        <i class="bi bi-person-slash"></i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-center">Toyota</td>
+                                                <td class="text-center">RAV4</td>
+                                                <td class="text-center"><span class="badge rounded-pill text-bg-success">Activo</span></td>
+                                                <td class="text-center">
+                                                    <button class="btn btn-outline-brand-blue btn-sm me-1 btn-editar-marca-modelo" data-id="2">
+                                                        <i class="bi bi-pencil"></i>
+                                                    </button>
+                                                    <button class="btn btn-outline-danger btn-sm btn-toggle-marca-modelo" data-id="2" data-estado="activo">
+                                                        <i class="bi bi-person-slash"></i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-center">Chevrolet</td>
+                                                <td class="text-center">Groove</td>
+                                                <td class="text-center"><span class="badge rounded-pill text-bg-secondary">Inactivo</span></td>
+                                                <td class="text-center">
+                                                    <button class="btn btn-outline-brand-blue btn-sm me-1 btn-editar-marca-modelo" data-id="3">
+                                                        <i class="bi bi-pencil"></i>
+                                                    </button>
+                                                    <button class="btn btn-outline-success btn-sm btn-toggle-marca-modelo" data-id="3" data-estado="inactivo">
+                                                        <i class="bi bi-person-check"></i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
+                            <i class="bi bi-x-circle"></i>
+                            Cerrar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- MODAL NUEVO/EDITAR ROL -->
+        <div id="mdlRolForm" class="modal fade modal-overlay-window" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header bg-navy text-light">
+                        <h5 class="modal-title" id="ttlMdlRolForm">
+                            <i class="bi bi-plus-circle me-2"></i>Nuevo rol
+                        </h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+
+                    <div class="modal-body bg-light">
+                        <form id="frmRol">
+                            <input type="hidden" id="hdnRolId">
+
+                            <div class="mb-3">
+                                <label for="txtNombreRol" class="form-label fw-semibold">Nombre del rol</label>
+                                <input type="text" id="txtNombreRol" class="form-control" placeholder="Ingrese nombre del rol">
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="txtDescripcionRol" class="form-label fw-semibold">Descripción</label>
+                                <textarea id="txtDescripcionRol" class="form-control" rows="3" placeholder="Ingrese descripción"></textarea>
+                            </div>
+
+                            <div class="mb-0">
+                                <label for="slcEstadoRol" class="form-label fw-semibold">Estado</label>
+                                <select id="slcEstadoRol" class="form-select">
+                                    <option value="activo" selected>Activo</option>
+                                    <option value="inactivo">Inactivo</option>
+                                </select>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
+                            <i class="bi bi-x-circle"></i>
+                            Cancelar
+                        </button>
+                        <button type="button" id="btnGuardarRol" class="btn btn-success">
+                            <i class="bi bi-floppy me-1"></i> 
+                            Guardar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- MODAL NUEVO/EDITAR ESTADO -->
+        <div id="mdlEstadoForm" class="modal fade modal-overlay-window" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header bg-navy text-light">
+                        <h5 class="modal-title" id="ttlMdlEstadoForm">
+                            <i class="bi bi-plus-circle me-2"></i>Nuevo estado
+                        </h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+
+                    <div class="modal-body bg-light">
+                        <form id="frmEstado">
+                            <input type="hidden" id="hdnEstadoId">
+
+                            <div class="mb-3">
+                                <label for="txtNombreEstado" class="form-label fw-semibold">Nombre del estado</label>
+                                <input type="text" id="txtNombreEstado" class="form-control" placeholder="Ingrese nombre del estado">
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="slcContextoEstado" class="form-label fw-semibold">Contexto</label>
+                                <select id="slcContextoEstado" class="form-select">
+                                    <option value="" selected disabled>Seleccione contexto</option>
+                                    <option value="usuario">Usuario</option>
+                                    <option value="vehiculo">Vehículo</option>
+                                    <option value="mantencion">Mantención</option>
+                                    <option value="asignacion">Asignación</option>
+                                </select>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="txtDescripcionEstado" class="form-label fw-semibold">Descripción</label>
+                                <textarea id="txtDescripcionEstado" class="form-control" rows="3" placeholder="Ingrese descripción"></textarea>
+                            </div>
+
+                            <div class="mb-0">
+                                <label for="slcEstadoRegistro" class="form-label fw-semibold">Estado del registro</label>
+                                <select id="slcEstadoRegistro" class="form-select">
+                                    <option value="activo" selected>Activo</option>
+                                    <option value="inactivo">Inactivo</option>
+                                </select>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
+                            <i class="bi bi-x-circle"></i>
+                            Cancelar
+                        </button>
+                        <button type="button" id="btnGuardarEstado" class="btn btn-success">
+                            <i class="bi bi-floppy me-1"></i> 
+                            Guardar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- MODAL NUEVO/EDITAR TIPO MANTENCIÓN -->
+        <div id="mdlTipoMantencionForm" class="modal fade modal-overlay-window" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header bg-navy text-light">
+                        <h5 class="modal-title" id="ttlMdlTipoMantencionForm">
+                            <i class="bi bi-plus-circle me-2"></i>Nuevo tipo de mantención
+                        </h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+
+                    <div class="modal-body bg-light">
+                        <form id="frmTipoMantencion">
+                            <input type="hidden" id="hdnTipoMantencionId">
+
+                            <div class="mb-3">
+                                <label for="txtNombreTipoMantencion" class="form-label fw-semibold">Nombre del tipo</label>
+                                <input type="text" id="txtNombreTipoMantencion" class="form-control" placeholder="Ingrese tipo de mantención">
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="txtDescripcionTipoMantencion" class="form-label fw-semibold">Descripción</label>
+                                <textarea id="txtDescripcionTipoMantencion" class="form-control" rows="3" placeholder="Ingrese descripción"></textarea>
+                            </div>
+
+                            <div class="mb-0">
+                                <label for="slcEstadoTipoMantencion" class="form-label fw-semibold">Estado</label>
+                                <select id="slcEstadoTipoMantencion" class="form-select">
+                                    <option value="activo" selected>Activo</option>
+                                    <option value="inactivo">Inactivo</option>
+                                </select>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
+                            <i class="bi bi-x-circle"></i>
+                            Cancelar
+                        </button>
+                        <button type="button" id="btnGuardarTipoMantencion" class="btn btn-success">
+                            <i class="bi bi-floppy me-1"></i> 
+                            Guardar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- MODAL NUEVO/EDITAR MARCA/MODELO -->
+        <div id="mdlMarcaModeloForm" class="modal fade modal-overlay-window" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header bg-navy text-light">
+                        <h5 class="modal-title" id="ttlMdlMarcaModeloForm">
+                            <i class="bi bi-plus-circle me-2"></i>Nueva marca / modelo
+                        </h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+
+                    <div class="modal-body bg-light">
+                        <form id="frmMarcaModelo">
+                            <input type="hidden" id="hdnMarcaModeloId">
+
+                            <div class="mb-3">
+                                <label for="txtMarcaVehiculo" class="form-label fw-semibold">Marca</label>
+                                <input type="text" id="txtMarcaVehiculo" class="form-control" placeholder="Ingrese marca">
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="txtModeloVehiculo" class="form-label fw-semibold">Modelo</label>
+                                <input type="text" id="txtModeloVehiculo" class="form-control" placeholder="Ingrese modelo">
+                            </div>
+
+                            <div class="mb-0">
+                                <label for="slcEstadoMarcaModelo" class="form-label fw-semibold">Estado</label>
+                                <select id="slcEstadoMarcaModelo" class="form-select">
+                                    <option value="activo" selected>Activo</option>
+                                    <option value="inactivo">Inactivo</option>
+                                </select>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
+                            <i class="bi bi-x-circle"></i>
+                            Cancelar
+                        </button>
+                        <button type="button" id="btnGuardarMarcaModelo" class="btn btn-success">
+                            <i class="bi bi-floppy me-1"></i> 
+                            Guardar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- MODAL CERRAR VIAJE -->
+         <div id="mdlCerrarViaje" class="modal fade" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content rounded-4">
+                    <div class="modal-header bg-navy text-light">
+                        <h5 class="modal-title">
+                            <i class="bi bi-flag me-2"></i>Cerrar viaje
+                        </h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+
+                    <div class="modal-body bg-light">
+                        <form id="frmCerrarViaje">
+                            <input type="hidden" id="hdnCerrarViajeId">
+                            <input type="hidden" id="hdnCerrarVehiculoId">
+
+                            <div class="row g-3 mb-3">
+                                <div class="col-4">
+                                    <label for="txtCerrarVehiculo" class="form-label fw-semibold">Vehículo</label>
+                                    <input type="text" id="txtCerrarVehiculo" class="form-control" readonly>
+                                </div>
+
+                                <div class="col-4">
+                                    <label for="txtCerrarPatente" class="form-label fw-semibold">Patente</label>
+                                    <input type="text" id="txtCerrarPatente" class="form-control" readonly>
+                                </div>
+
+                                <div class="col-4">
+                                    <label for="txtCerrarMarcaModelo" class="form-label fw-semibold">Marca / Modelo</label>
+                                    <input type="text" id="txtCerrarMarcaModelo" class="form-control" readonly>
+                                </div>
+
+                                <div class="col-4">
+                                    <label for="txtCerrarFechaInicio" class="form-label fw-semibold">Fecha inicio viaje</label>
+                                    <input type="text" id="txtCerrarFechaInicio" class="form-control" readonly>
+                                </div>
+
+                                <div class="col-4">
+                                    <label for="txtCerrarKmSalida" class="form-label fw-semibold">Kilometraje de salida</label>
+                                    <input type="text" id="txtCerrarKmSalida" class="form-control" readonly>
+                                </div>
+
+                                <div class="col-4">
+                                    <label for="txtCerrarKmEntrega" class="form-label fw-semibold">Kilometraje de entrega</label>
+                                    <input type="number" id="txtCerrarKmEntrega" class="form-control" placeholder="Ingrese kilometraje final">
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="txtObservacionCierreViaje" class="form-label fw-semibold">Observación de cierre</label>
+                                <textarea id="txtObservacionCierreViaje" class="form-control" rows="3" placeholder="Ingrese observaciones del viaje (opcional)"></textarea>
+                            </div>
+
+                            <div class="card shadow-sm border-0">
+                                <div class="card-header card-header-navy">
+                                    Información de carga de combustible
+                                </div>
+                                <div class="card-body">
+                                    <div class="mb-3">
+                                        <label for="slcCargoBencina" class="form-label fw-semibold">¿Cargó bencina?</label>
+                                        <select id="slcCargoBencina" class="form-select">
+                                            <option value="no" selected>No</option>
+                                            <option value="si">Sí</option>
+                                        </select>
+                                    </div>
+
+                                    <div id="bloqueCargaBencina" class="d-none">
+                                        <div class="row g-3">
+                                            <div class="col-md-6">
+                                                <label for="txtMontoBencina" class="form-label fw-semibold">Monto cargado</label>
+                                                <input type="number" id="txtMontoBencina" class="form-control" placeholder="Ingrese monto">
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <label for="flBoletaBencina" class="form-label fw-semibold">Boleta (PDF o imagen)</label>
+                                                <input type="file" id="flBoletaBencina" class="form-control" accept=".pdf,image/*">
+                                            </div>
+
+                                            <div class="col-12">
+                                                <label for="txtObservacionBencina" class="form-label fw-semibold">Observación carga combustible</label>
+                                                <textarea id="txtObservacionBencina" class="form-control" rows="2" placeholder="Opcional"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-brand-blue" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="button" id="btnConfirmarCerrarViaje" class="btn btn-danger">
+                            <i class="bi bi-check2-circle me-1"></i> Cerrar viaje
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </body>
 </html>
